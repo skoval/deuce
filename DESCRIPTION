@@ -1,0 +1,13 @@
+Package: deuce
+Type: Package
+Title: Databases and functions to download stats on top players of ATP tour
+Version: 0.1
+Date: 7-31-2014
+Author: Stephanie Kovalchik
+Maintainer: Stephanie Kovalchik <s.a.kovalchik@gmail.com>
+Description: This package provides data frames of match-specific and yearly match summary
+    statistics for players on ATP tour and functions to download match-, year-
+    and surface-specific statistics from the Open Era to the present.
+Depends:
+    plyr
+License: GPL-2

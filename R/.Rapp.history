@@ -1,0 +1,50 @@
+fetch_draw <- function(tournament, year, type = "GrandSlam", maxround = 7, surface = "Hard") {#
+    base_url <- "http://www.atpworldtour.com/Share/Event-Draws.aspx?year=YEAR&EventId=TOURNAMENT&Draw=ms"#
+    base_url <- sub("YEAR", year, base_url)#
+    base_url <- sub("TOURNAMENT", tournament, base_url)#
+    the_source <- readLines(con = base_url, warn = FALSE)#
+    lines <- grep("Player1Link.*>", the_source)#
+    if (length(lines) == 0) #
+        NA else {#
+        Rounds <- 2^(maxround:0)#
+        LineNumbers <- list(lines[1] + 0:(Rounds[1] - 1) * 12)#
+        LineNumbers[[2]] <- LineNumbers[[1]][Rounds[1]] + cumsum(rep(c(12, 11), c(1, Rounds[2] - 1)))#
+        for (i in 3:length(Rounds)) LineNumbers[[i]] <- max(LineNumbers[[i - 1]]) + cumsum(rep(c(15, 11), c(1, Rounds[i] - 1)))#
+        Players <- lapply(LineNumbers, function(x) {#
+            sub("(.*>)([A-Za-z].*)(</a>$)", "\\2", the_source[x])#
+        })#
+        Ranks <- sub("(.*highestRound.>)(.*)(<.p>)", "\\2", the_source[grep("highestRound", the_source)])#
+        Ranks[grep("[0-9]", Ranks)] <- sub("(.)([0-9]+)(.)", "\\2", Ranks[grep("[0-9]", Ranks)])#
+        names(Ranks) <- unlist(Players)[1:length(Ranks)]#
+        Order <- 1:length(Ranks)#
+        if (type == "GrandSlam") #
+            Points <- c(2000, 1200, 720, 360, 180, 90, 45, 10) else if (type == "Masters128") #
+            Points <- c(1000, 600, 360, 180, 90, 45, 25, 10) else if (type == "Masters64") #
+            Points <- c(1000, 600, 360, 180, 90, 45, 10) else if (type == "50064") #
+            Points <- c(250, 125, 60, 30, 15, 10, 5) else Points <- c(250, 125, 60, 30, 15, 5)#
+        Result <- data.frame(Player = unlist(Players), Round = rep(Rounds, Rounds), Points = rep(Points[length(Points):1], Rounds))#
+        Date <- the_source[grep("tournamentSubTitle", the_source)]#
+        Date <- sub("(.* )([0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9][0-9][0-9])(.*)", "\\2", Date)#
+        Title <- the_source[grep("tournamentTitle", the_source)]#
+        Title <- sub("(.*aspx.>)(.*)(<.a>.*)", "\\2", Title)#
+        Result <- Result[Result$Player != "", ]#
+        Result <- Result[order(Result$Player, Result$Round), ]#
+        BestResult <- sapply(unique(Result$Player), function(x) which(Result$Player == x)[1])#
+        Result <- Result[BestResult, ]#
+        Result$surface <- surface#
+        Result$year <- year#
+        Result$Rank <- Ranks[match(Result$Player, names(Ranks))]#
+        Result$Order <- Order[match(Result$Player, names(Ranks))]#
+        Result$Date <- Date#
+        Result$Title <- Title#
+        Result[order(Result$Order), ]#
+    }#
+}
+load("~/Code/deuce/data/tournament.codes.RData")
+objects()
+head(tournament.codes)
+fetch_draw(807,2013,"Master64",7,"Clay")
+fetch_draw(807,2013,"Master",6,"Clay")
+fetch_draw(807,2013,"Master",5,"Clay")
+write.table(tournament.codes, file = "~/temp/tournament_codes.csv")
+write.table(tournament.codes, file = "~/Desktop/tournament_codes.csv")
