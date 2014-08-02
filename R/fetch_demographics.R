@@ -49,7 +49,7 @@ fetch_demographics_apply <- function(player) {
         Values
     }
         
-    
+        
     call <- fetch_url(player)
     if (is.na(call)) 
         stop("Player not found.")
@@ -63,7 +63,10 @@ fetch_demographics_apply <- function(player) {
     
     index <- lapply(paste(demo_fields, ":", sep = ""), function(x) grep(x, source, fixed = TRUE))
     
-    Values <- demo_stats(source, index[-2])
+    if(length(index[[2]])==0)
+	    Values <- demo_stats(source, index[-2])
+	 else
+	 	Values <- demo_stats(source, index[-1])
     
     HighRank <- sub("(.*>)([0-9]+)(<.span>.*)", "\\2", source[grep("High", source)])
     Values <- data.frame(
