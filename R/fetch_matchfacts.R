@@ -1,6 +1,6 @@
 fetch_matchfacts_url <- function(tournament = "Madrid", year = 2012, round = "R64", player = "H940") {
 
-  tournaments <- structure(list(code = c(807L, 6116L, 421L, 422L, 404L, 1536L, 
+       tournaments <- structure(list(code = c(807L, 6116L, 421L, 422L, 404L, 1536L, 
 403L, 410L, 352L, 416L, 5014L, 301L, 580L, 1720L, 425L, 328L, 
 316L, 747L, 339L, 773L, 506L, 360L, 891L, 499L, 451L, 495L, 741L, 
 468L, 314L, 500L, 414L, 717L, 319L, 6003L, 311L, 496L, 402L, 
@@ -34,18 +34,18 @@ fetch_matchfacts_url <- function(tournament = "Madrid", year = 2012, round = "R6
 46L, 60L, 58L, 59L, 24L, 49L, 19L, 62L, 63L, 43L), .Label = c("Abierto Mexicano Telcel", 
 "ABN AMRO World Tennis Tournament", "Aegon Championships", "Aegon International", 
 "Aircel Chennai Open", "Apia International Sydney", "Australian Open", 
-"Barcelona Open Banc Sabadell", "BB&T Atlanta Open", "bet-at-home Cup Kitzb\xd9hel", 
+"Barcelona Open Banc Sabadell", "BB&T Atlanta Open", "bet-at-home Cup Kitzbuhel", 
 "bet-at-home Open", "BMW Open by FWU AG", "BNP Paribas Masters", 
 "BNP Paribas Open", "Brasil Open 2014", "BRD Nastase Tiriac Trophy", 
 "Brisbane International presented by Suncorp", "China Open", 
 "Citi Open", "Copa Claro", "Credit Agricole Suisse Open Gstaad", 
-"Delray Beach Open by The Venetian\xac Las Vegas", "Dubai Duty Free Tennis Championships", 
+"Delray Beach Open by The Venetian Las Vegas", "Dubai Duty Free Tennis Championships", 
 "Erste Bank Open", "Fayez Sarofim & Co. U.S. Men's Clay Court Championship", 
 "French Open", "Gerry Weber Open", "Grand Prix Hassan II", "Hall of Fame Tennis Championships", 
 "Heineken Open", "If Stockholm Open", "Internazionali BNL d'Italia", 
 "Kremlin Cup by Bank of Moscow", "Malaysian Open, Kuala Lumpur", 
 "MercedesCup", "Monte-Carlo Rolex Masters", "Moselle Open", "Mutua Madrid Open", 
-"Negev Israel Open", "Open 13", "Open de Nice C\xaate d\xcdAzur", 
+"Negev Israel Open", "Open 13", "Open de Nice Cote d'Azur", 
 "Open Sud de France", "PBZ Zagreb Indoors", "Portugal Open", 
 "Qatar ExxonMobil Open", "Rakuten Japan Open Tennis Championships", 
 "Rio Open presented by Claro hdtv", "Rogers Cup", "Royal Guard Open Chile", 
@@ -70,129 +70,6 @@ fetch_matchfacts_url <- function(tournament = "Madrid", year = 2012, round = "R6
 "Grass", "Hard"), class = "factor")), .Names = c("code", "location", 
 "tournament", "tier", "rounds", "surface"), class = "data.frame", row.names = c(NA, 
 -63L))
-  
-  check.tournament <- grep(tournament, tournaments$location)
-    if(length(check.tournament)==0) check.tournament <- grep(tournament, tournaments$tournament)
-    if(length(check.tournament)==0)
-    	stop("Tournament not found.")
-    
-    if(length(check.tournament)>1){
-    	check.tournament <- check.tournament[1]
-    	warning("Multiple tournament matches. Taking first.")
-    }
-	
-	tournament <- tournaments$code[check.tournament]    
-    rounds <- c("R128", "R64", "R32", "R16", "Q", "S", "F")
-    round <- which(rounds == round)
-    
-    base.url <- "http://www.atpworldtour.com/Share/Match-Facts-Pop-Up.aspx?"
-    
-    match.characteristic <- paste(paste("t=", tournament, collapse = "", sep = ""), paste("y=", year, collapse = "", sep = ""), paste("r=", 
-        round, collapse = "", sep = ""), paste("p=", player, collapse = "", sep = ""), sep = "&")
-    
-    file <- paste(base.url, match.characteristic, collapse = "", sep = "")
-    
-    file
-}
-
-Tags <- c("Winner", "Player", "Opponent", "Time", "Aces", "Double Faults", "1st Serve In", "1st Serves", "1st Serve Points Won", "2nd Serve Points Won", 
-    "2nd Serve In", "Break Points Saved", "Break Points Faced", "Service Games Played", "1st Serve Return Points Won", "1st Serve Return Points", 
-    "2nd Serve Return Points Won", "2nd Serve Return Points", "Break Points Converted", "Break Points Opportunities", "Return Games Played", 
-    "Total Service Points Won", "Total Service Points", "Total Return Points Won", "Total Return Points", "Total Points Won", "Total Points")
-
-is.match <- function(lines) {
-    
-    NotMatch <- length(grep("(/)", lines, fixed = TRUE)) > 0
-    
-    if (!NotMatch) {
-        NoData <- length(grep("N/A Bye", lines, fixed = TRUE)) > 0
-    } else {
-        NoData <- TRUE
-    }
-    
-    !NoData
-}
-
-check_winner <- function(winner.name, code) {
-
-	structure(list(player = c("Novak Djokovic", "Rafael Nadal", "Roger Federer", 
-"Andy Murray", "Jo-Wilfried Tsonga", "David Ferrer", "Tomas Berdych", 
-"Janko Tipsarevic", "Mardy Fish", "John Isner", "Gilles Simon", 
-"Juan Martin Del Potro", "Nicolas Almagro", "Gael Monfils", "Juan Monaco", 
-"Feliciano Lopez", "Kei Nishikori", "Richard Gasquet", "Fernando Verdasco", 
-"Alexandr Dolgopolov", "Florian Mayer", "Stanislas Wawrinka", 
-"Milos Raonic", "Marin Cilic", "Radek Stepanek", "Julien Benneteau", 
-"Marcel Granollers", "Andy Roddick", "Viktor Troicki", "Juan Ignacio Chela", 
-"Kevin Anderson", "Robin Soderling", "Bernard Tomic", "Philipp Kohlschreiber", 
-"Jurgen Melzer", "Mikhail Youzhny", "Carlos Berlocq", "Pablo Andujar", 
-"Marcos Baghdatis", "Thomaz Bellucci", "Alex Bogomolov Jr", "Albert Ramos", 
-"Robin Haase", "Jarkko Nieminen", "Denis Istomin", "Andreas Seppi", 
-"Michael Llodra", "Fabio Fognini", "David Nalbandian", "Lukasz Kubot", 
-"Donald Young", "Juan Carlos Ferrero", "Santiago Giraldo", "Mikhail Kukushkin", 
-"Alejandro Falla", "Nikolay Davydenko", "Yen-Hsun Lu", "Ryan Harrison", 
-"Go Soeda", "Jeremy Chardy", "Ivo Karlovic", "Gilles Muller", 
-"Dudi Sela", "Xavier Malisse", "Lukas Lacko", "Olivier Rochus", 
-"Steve Darcis", "Sergiy Stakhovsky", "Albert Montanes", "Flavio Cipolla", 
-"Leonardo Mayer", "Matthew Ebden", "Filippo Volandri", "Ivan Dodig", 
-"Guillermo Garcia-Lopez", "Sam Querrey", "Potito Starace", "Igor Andreev", 
-"Lukas Rosol", "Tatsuma Ito", "Tobias Kamke", "Paolo Lorenzi", 
-"Edouard Roger-Vasselin", "Ernests Gulbis", "Malek Jaziri", "Dmitry Tursunov", 
-"Bjorn Phau", "Igor Kunitsyn", "Nicolas Mahut", "Rui Machado", 
-"Cedrik-Marcel Stebe", "James Blake", "Philipp Petzschner", "Grigor Dimitrov", 
-"Adrian Ungur", "Benoit Paire", "Ruben Ramirez Hidalgo", "Simone Bolelli", 
-"Vasek Pospisil", "Pere Riba", "Martin Klizan", "Blaz Kavcic", 
-"Matthias Bachinger", "Victor Hanescu", "Daniel Brands", "Michael Russell", 
-"Daniel Gimeno-Traver", "David Goffin", "Frederico Gil", "Andreas Beck", 
-"Karol Beck", "Michael Berrer", "Wayne Odesnik", "Paul Capdeville", 
-"Eric Prodon", "Joao Souza", "Frank Dancevic", "Horacio Zeballos", 
-"Adrian Mannarino", "Jurgen Zopp", "Rogerio Dutra Silva", "Marinko Matosevic", 
-"Igor Sijsling", "Rajeev Ram", "Federico Delbonis", "Alessandro Giannessi", 
-"Antonio Veic", "Jesse Levine", "Roberto Bautista-Agut", "Marsel Ilhan", 
-"Ryan Sweeting", "Grega Zemlja", "Bobby Reynolds", "Tommy Haas", 
-"Marco Chiudinelli", "Jan Hajek", "James Ward", "Arnaud Clement", 
-"Rik De Voest", "Joao Sousa", "Ricardo Mello", "Andrey Golubev", 
-"Augustin Gensse", "Diego Junqueira", "Ruben Bemelmans", "Evgeny Donskoy", 
-"Julio Silva", "Daniel Munoz-De La Nava", "Marc Gicquel", "Martin Alund", 
-"Florent Serra", "Andreas Haider-Maurer", "Thiago Alves", "Guillaume Rufin", 
-"Benjamin Becker", "Aljaz Bedene", "Andrey Kuznetsov", "Izak Van Der Merwe", 
-"Dustin Brown", "Stephane Robert", "Matteo Viola", "Pablo Carreno-Busta", 
-"Thomas Schoorel", "Alexander Kudryavtsev", "Teymuraz Gabashvili", 
-"Kenny De Schepper", "Yuichi Sugita", "James Duckworth", "Rainer Schuettler", 
-"Sergei Bubka", "Denis Kudla", "Michael Yani", "Danai Udomchoke", 
-"Javier Marti", "Tsung-Hua Yang", "Lleyton Hewitt", "Ricardas Berankis", 
-"Maxime Authom", "Eduardo Schwank", "Carlos Salamanca", "Ivo Minar", 
-"Jonathan Dasnieres De Veigy", "Arnau Brugues-Davi", "Robby Ginepri", 
-"Jan Mertl", "Amir Weintraub", "Jan Hernych", "Inigo Cervantes", 
-"Maximo Gonzalez", "Konstantin Kravchuk", "Dusan Lajovic", "Jimmy Wang", 
-"Laurynas Grigelis", "Gregoire Burquier", "Facundo Bagnis", "Gastao Elias", 
-"Nikola Ciric", "Peter Gojowczyk", "Mischa Zverev", "Peter Torebko"
-), code = c("D643", "N409", "F324", "MC10", "T786", "F401", "BA47", 
-"T742", "F339", "I186", "SD32", "D683", "A479", "MC65", "MA21", 
-"L397", "N552", "G628", "V306", "D801", "MB02", "W367", "R975", 
-"C977", "S694", "B747", "G710", "R485", "T840", "C514", "A678", 
-"SA49", "TA46", "K435", "M762", "Y061", "B884", "A596", "B837", 
-"BD20", "B842", "R772", "H756", "N289", "I165", "SA93", "L428", 
-"F510", "N301", "K540", "Y124", "F316", "G725", "K926", "F444", 
-"D402", "L575", "H940", "SC47", "CA12", "K336 ", "MA30", "SC56", 
-"M680", "L797", "R397", "D632", "SC77", "M824", "C723", "MD56", 
-"E690", "V254", "D646", "G476", "Q927", "S843", "A511", "R685", 
-"I230", "K839", "L503", "R613", "G858", "J267", "T315", "P436", 
-"K403", "M873", "MA49", "SK94", "B676", "P624", "D875", "U061", 
-"PD31", "R383", "BA98", "PD07", "R750", "K966", "K834", "BC65", 
-"H528", "BC72", "R368", "G676", "GB88", "G717", "BA86", "B804", 
-"B678", "O234", "C634", "P487", "SG64", "D499", "Z184", "ME82", 
-"Z254", "SC73", "ME05", "SF36", "R548", "D874", "G983", "V564", 
-"L799", "BD06", "K771", "SG87", "Z189", "R483", "H355", "C582", 
-"H571", "W503", "C487", "D424", "SH90", "M708", "G806", "G695", 
-"J214", "BE54", "D864", "S877", "M915", "G436", "A539", "S963", 
-"H804", "A410", "RA17", "B896", "BH09", "KB54", "V379", "BA65", 
-"R612", "V490", "", "CD85", "K596", "G681", "D750", "SE73", "D994", 
-"S636", "BC11", "KB09", "Y070", "U043", "M108", "T982", "H432", 
-"BE90", "A789", "SE66", "SB28", "MA41", "D729", "BA77", "G569", 
-"MA38", "W471", "H442", "CA33", "G585", "K776", "L987", "W373", 
-"GA71", "BC36", "BF23", "E698", "C706", "G976", "Z168", "T911"
-)), .Names = c("player", "code"), class = "data.frame", row.names = c(NA, 
--200L))
 	
     if (length(grep(code, players$code)) > 0) {
         # IF PLAYER CODE IN
