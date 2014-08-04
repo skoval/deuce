@@ -22,7 +22,12 @@ fetch_url <- function(name) {
     	url <- sub("First", F, url)
     	url <- sub("Last", L, url)
     	url <- sub("Full-Name",paste(query.terms,sep="",collapse="-"),url)
-    	url
+    	test.url <- tryCatch(open(url(paste("http://www.atpworldtour.com",url,sep=""))), error = function(x) NA)
+    	if(is.na(test.url)){
+    		url <- "/Tennis/Players/Top-Players/Full-Name.aspx"	
+    		url <- sub("Full-Name",paste(query.terms,sep="",collapse="-"),url)
+    	}    		
+      url
     }
     else{
     	NA
