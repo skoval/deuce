@@ -83,7 +83,6 @@ fetch_draw <- function(tournament, year){
     }
 	
 	tournament <- tournaments$code[check.tournament]    
-	maxround <- tournaments$rounds[check.tournament]
 	type <- tournaments$tier[check.tournament]
 	surface <- tournaments$surface[check.tournament]
 	
@@ -92,6 +91,22 @@ fetch_draw <- function(tournament, year){
     base_url <- sub("TOURNAMENT", tournament, base_url)
     
     the_source <- readLines(con = base_url, warn = FALSE)
+    
+    drawsize <- grep("Draw:",the_source)
+    
+    if(length(drawsize)!=0){
+    	drawsize <- as.numeric(sub("(.*>)([0-9][0-9][0-9]?)(<.*)","\\2",the_source[drawsize[1]]))
+    	if(!is.na(drawsize))
+    	maxround <- ifelse(drawsize <= 2^5, 5, 
+    				ifelse(drawsize <= 2^6, 6, 7))
+    }
+    else{
+    	drawsize <- NA
+    }
+    
+     
+    if(is.na(drawsize))
+    	maxround <- tournaments$rounds[check.tournament]
     
     lines <- grep("Player1Link.*>", the_source)
     
@@ -115,8 +130,9 @@ fetch_draw <- function(tournament, year){
         
         Order <- 1:length(Ranks)
         
-        if (type == "Grand Slam") 
-            Points <- c(2000, 1200, 720, 360, 180, 90, 45, 10) else if (type == "Masters 1000" & maxround == 7) 
+        if (type == "Grand Slam" & maxround == 7) 
+            Points <- c(2000, 1200, 720, 360, 180, 90, 45, 10) else if (type == "Grand Slam" & maxround == 6) 
+            Points <- c(2000, 1200, 720, 360, 180, 90, 45) else if (type == "Masters 1000" & maxround == 7) 
             Points <- c(1000, 600, 360, 180, 90, 45, 25, 10) else if (type == "Masters 1000" & maxround == 6) 
             Points <- c(1000, 600, 360, 180, 90, 45, 10) else if (type == "500" & maxround == 6) 
             Points <- c(500, 300, 180, 90, 45, 20, 0) else if (type == "500" & maxround == 5) 

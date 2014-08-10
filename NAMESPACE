@@ -1,4 +1,5 @@
-import(plyr)
+importFrom("plyr", ddply)
+importFrom("lubridate", ymd)
 
 export(
 	"fetch_activity",
@@ -8,7 +9,8 @@ export(
 	"fetch_summary",
 	"fetch_records",
 	"fetch_rankings_history",
-	"fetch_rankings"
+	"fetch_rankings",
+	"fetch_wta_draw"
 )
 
 
