@@ -1,6 +1,6 @@
-fetch_matchfacts_url <- function(tournament = "Madrid", year = 2012, round = "R64", player = "H940") {
-
-       tournaments <- structure(list(code = c(807L, 6116L, 421L, 422L, 404L, 1536L, 
+fetch_matchfacts_url <- function(tournament="ATP World Tour Masters 1000 Madrid", year=2012, round="R64", player="H940"){
+	
+	       tournaments <- structure(list(code = c(807L, 6116L, 421L, 422L, 404L, 1536L, 
 403L, 410L, 352L, 416L, 5014L, 301L, 580L, 1720L, 425L, 328L, 
 316L, 747L, 339L, 773L, 506L, 360L, 891L, 499L, 451L, 495L, 741L, 
 468L, 314L, 500L, 414L, 717L, 319L, 6003L, 311L, 496L, 402L, 
@@ -70,19 +70,78 @@ fetch_matchfacts_url <- function(tournament = "Madrid", year = 2012, round = "R6
 "Grass", "Hard"), class = "factor")), .Names = c("code", "location", 
 "tournament", "tier", "rounds", "surface"), class = "data.frame", row.names = c(NA, 
 -63L))
-	
-    if (length(grep(code, players$code)) > 0) {
-        # IF PLAYER CODE IN
-        player.name <- players$player[which(players$code == code)]
-        return(as.numeric(player.name == winner.name))
-    } else {
-        return(NA)
+
+ 	check.tournament <- grep(tournament, tournaments$location)
+    if(length(check.tournament)==0) check.tournament <- grep(tournament, tournaments$tournament)
+    if(length(check.tournament)==0)
+    	stop("Tournament not found.")
+    
+    if(length(check.tournament)>1){
+    	check.tournament <- check.tournament[1]
+    	warning("Multiple tournament matches. Taking first.")
     }
+	
+	tournament <- tournaments$code[check.tournament]    
+
+	rounds <- c("R128","R64","R32","R16","Q","S","F")
+	round <- which(rounds==round)
+	
+	base.url <- "http://www.atpworldtour.com/Share/Match-Facts-Pop-Up.aspx?"
+	
+	match.characteristic <- paste(paste("t=",tournament,collapse="",sep=""),
+								  paste("y=",year,collapse="",sep=""),
+								  paste("r=",round,collapse="",sep=""),
+								  paste("p=",player,collapse="",sep=""),sep="&")
+	
+	file <- paste(base.url,match.characteristic,collapse="",sep="")
+
+file
 }
+
+
+Tags <- c("Winner","Player","Opponent","Time","Aces",
+			"Double Faults",
+			"1st Serve In","1st Serves",
+			"1st Serve Points Won",
+			"2nd Serve Points Won","2nd Serve In",
+			"Break Points Saved","Break Points Faced",
+			"Service Games Played",
+			"1st Serve Return Points Won","1st Serve Return Points",
+			"2nd Serve Return Points Won","2nd Serve Return Points",
+			"Break Points Converted","Break Points Opportunities",
+			"Return Games Played",
+			"Total Service Points Won","Total Service Points",
+			"Total Return Points Won","Total Return Points",
+			"Total Points Won","Total Points")
+
+is_match <- function(lines){
+	
+	NotMatch <- length(grep("(/)",lines,fixed=TRUE))>0
+	
+	if(!NotMatch){
+		NoData <- length(grep("N/A Bye",lines,fixed=TRUE))>0
+		}
+	else{
+		NoData <- TRUE
+	}
+
+!NoData
+}			
+
+check_winner <- function(winner.name, code){
+	if(length(grep(code,players$code))>0){ # IF PLAYER CODE IN 
+		player.name <- players$player[which(players$code==code)]
+		return(as.numeric(player.name==winner.name))
+	}
+	else{
+		return(NA)
+	}
+}
+
 
 matchfacts_values <- function(lines, code) {
     
-    if (is.match(lines)) {
+    if (is_match(lines)) {
         
         # Player Names
         player.name.index <- grep("playerName", lines)
@@ -157,6 +216,7 @@ fetch_matchfacts_apply <- function(tournament = "Madrid", year = 2012, round = "
     URLMatchFacts <- url(URLMatchFacts)
     MatchContent <- readLines(con = URLMatchFacts, warn = FALSE)
     close(URLMatchFacts)
+    
 matchfacts_values(MatchContent, player)
 }
 
@@ -252,7 +312,7 @@ fetch_matchfacts <- function(tournament = "Madrid", year = 2012, player = "Nadal
     Tournament <- rep(tournament, each = length(player) * length(rounds))
     
     Result <- do.call("rbind",
-    			mapply(fetch_matchfacts_apply, tournament = Tournament, year = Year, round = Round, player = Player, SIMPLIFY = FALSE))
+    			mapply(fetch_matchfacts_apply, tournament = Tournament, year = Year, round = Round, player = player, SIMPLIFY = FALSE))
     
     NoMatch <- apply(Result, 1, function(x) all(is.na(x)))
     Result <- Result[!NoMatch,]
