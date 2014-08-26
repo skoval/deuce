@@ -70,8 +70,5 @@ Stephanie Kovalchik <s.a.kovalchik@gmail.com>
 
 
 \examples{
-
-data(players)
-data(tournaments)
 fetch_matchfacts(tournament = "Canada", year = 2013, player = "Raonic")
 }
