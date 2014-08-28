@@ -12,7 +12,8 @@ export(
 	"fetch_rankings",
 	"fetch_wta_draw",
 	"fetch_head_to_head",
-	"fetch_wta_rankings"
+	"fetch_wta_rankings",
+        "fetch_player_code"
 )
 
 
