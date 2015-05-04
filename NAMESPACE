@@ -13,7 +13,9 @@ export(
 	"fetch_wta_draw",
 	"fetch_head_to_head",
 	"fetch_wta_rankings",
-        "fetch_player_code"
+        "fetch_player_code",
+	"fetch_grandslam_matches",
+	"fetch_matchfacts_from_url"
 )
 
 

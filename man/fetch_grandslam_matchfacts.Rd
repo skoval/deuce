@@ -1,15 +1,15 @@
-\name{fetch_matchfacts}
-\alias{fetch_matchfacts}
+\name{fetch_grandslam_matches}
+\alias{fetch_grandslam_matches}
 
 \title{
-Download ATP player match-specific statistics
+Download ATP player match-specific statistics for Grand Slams only
 }
 \description{
-Creates a data frame of service and return statistics for all matches for specified player and year.
+Creates a data frame of service and return statistics for all matches at the Majors for specified player and year.
 }
 
 \usage{
-fetch_matchfacts(player, year)
+fetch_grandslam_matches(player, year)
 }
 
 \arguments{
@@ -70,5 +70,5 @@ Stephanie Kovalchik <s.a.kovalchik@gmail.com>
 
 
 \examples{
-fetch_matchfacts(year = 2013, player = "Milos Raonic")
+fetch_grandslam_matches(year = 2013, player = "Milos Raonic")
 }

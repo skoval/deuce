@@ -12,8 +12,10 @@ fetch_rankings <- function(dd.mm.yyyy, min.rank = 0, max.rank = 100) {
         name_pattern <- "(.*>)(.*)(</a>.*)"
         change_pattern <- "(.*>)(-?[0-9]+)(</td.*)"
         rank_pattern <- "(.*>)([0-9]+)(</span.*)"
+        country_pattern <- "(.*\\()([A-Z][A-Z][A-Z])(\\))"
         
         names <- sub("&nbsp;", " ", sub(name_pattern, "\\2", lines[grep("[[:punct:]]rank[[:punct:]]", lines) + 2]))
+        countries <- sub(country_pattern, "\\2", lines[grep("[[:punct:]]rank[[:punct:]]", lines) + 2])
         points <- sub(name_pattern, "\\2", lines[grep("[[:punct:]]rank[[:punct:]]", lines) + 6])
         weekchange <- sub(change_pattern, "\\2", lines[grep("[[:punct:]]rank[[:punct:]]", lines) + 7])
         tournaments <- sub(name_pattern, "\\2", lines[grep("[[:punct:]]rank[[:punct:]]", lines) + 8])
@@ -21,6 +23,7 @@ fetch_rankings <- function(dd.mm.yyyy, min.rank = 0, max.rank = 100) {
         
         data.frame(player = names, 
         		     rank = as.numeric(rank), 
+        		     country = countries,
         		     points = as.numeric(sub(",","",points)), 
         		     weekchange = as.numeric(weekchange), 
         		     tournaments = as.numeric(tournaments), 

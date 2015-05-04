@@ -58,7 +58,7 @@ fetch_summary <- function(players, year = NULL, surface = c("All", "Clay", "Hard
         call <- url(call)
         
         lines <- readLines(call, ok = TRUE, warn = FALSE, n = 400, encoding = "UTF-8")
-        close(call)
+        on.exit(closeAllConnections())
         
         get_stats(lines, FieldIndex(lines))
     }
