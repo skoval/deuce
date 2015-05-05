@@ -195,7 +195,7 @@ fetch_matchfacts <- function(player, year) {
     Result <- do.call("rbind", lapply(urls, fetch_matchfacts_apply))
    	Result$Year <- year
    	Result$Date <- rep(dates, each = 2)
-   	Result <- Result[!is.na(Results$Round),]
+   	Result <- Result[!is.na(Result$Round),]
    	
 Result
 } 
