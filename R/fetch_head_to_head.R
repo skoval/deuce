@@ -8,8 +8,8 @@ fetch_head_to_head <- function(player1, player2, type = "ATP"){
 	else
 	    base.url <- "http://www.stevegtennis.com/head-to-head/women/player1/player2/"
 	    
-	base.url <- sub("player1",player1,base.url)
-	base.url <- sub("player2",player2,base.url)
+	base.url <- sub("player1",player1, base.url)
+	base.url <- sub("player2",player2, base.url)
 	
 	call <- url(base.url)
 	lines <- readLines(call, warn = FALSE)

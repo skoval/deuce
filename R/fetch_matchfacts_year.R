@@ -1,8 +1,14 @@
-fetch_matchfacts_url <- function(player, year){
+fetch_matchfacts_url <- function(player, year, url = NULL){
 	
-	url <- fetch_url(player)
-	base_url <- "http://www.atpworldtour.com/URL?t=pa&y=YEAR&m=s&e=0#"
-	url <- sub("URL", url, base_url)
+	if(is.null(url)){
+		url <- fetch_url(player)
+		base_url <- "http://www.atpworldtour.com/URL?t=pa&y=YEAR&m=s&e=0#"
+		url <- sub("URL", url, base_url)
+	}
+	else{
+		url <- paste(url, "?t=pa&y=YEAR&m=s&e=0#", sep = "")
+	}
+
 	url <- sub("YEAR", year, url)
 	
 	lines <- readLines(url, warn = FALSE)
@@ -18,12 +24,16 @@ fetch_matchfacts_url <- function(player, year){
 
 	tournaments <- sub("(.*)(t=[0-9]+)(&.*)","\\2",lines[match_lines])
 	tournaments <- factor(tournaments,  levels = unique(tournaments))
-	dates <- dates[tournaments]
 	
+	# Surface
+	surface <- sub("(.*)(Hard|Clay|Grass)(.*)","\\2", lines[date_lines])	
 	urls <- sub("(.*)(/Share/Match-Facts-Pop-Up.aspx.*p=....)(.*)", "\\2", lines[match_lines])
-	names(urls) <- dates
-	
-urls
+
+data.frame(
+	urls = urls,
+	date = dates[tournaments],
+	surface = surface[tournaments]
+	)
 }
 
 
@@ -182,19 +192,22 @@ fetch_matchfacts_apply <- function(URLMatchFacts) {
 matchfacts_values(MatchContent)
 }
 
-fetch_matchfacts <- function(player, year) {
+fetch_matchfacts <- function(player, year, url = NULL) {
  
- 	urls <- fetch_matchfacts_url(player, year)
- 	dates <- names(urls)
+ 	url_output <- fetch_matchfacts_url(player, year, url = url)
+ 	urls <- url_output$url
+ 	dates <- url_output$date
  	
     urls <- paste("http://www.atpworldtour.com", urls, sep = "")
     drop <- !grepl("r=-", urls)
     urls <- urls[drop] # Remove qualifying/RR
 	dates <- dates[drop]  
+	surface <- url_output$surface[drop]
 	
     Result <- do.call("rbind", lapply(urls, fetch_matchfacts_apply))
    	Result$Year <- year
    	Result$Date <- rep(dates, each = 2)
+   	Result$Surface <- rep(surface, each = 2)
    	Result <- Result[!is.na(Result$Round),]
    	
 Result

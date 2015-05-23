@@ -57,6 +57,7 @@ Data frame with the columns:
 \item{Year}{numeric}
 \item{Round}{character}
 \item{Date}{character}
+\item{Surface}{character}
 }
 }
 
