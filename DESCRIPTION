@@ -1,12 +1,10 @@
 Package: deuce
 Type: Package
-Title: Databases and functions to download stats on top players of ATP and WTA tour
+Title: Software to Gather Data on Professional Tennis
 Version: 0.1
-Date: 7-31-2014
+Date: 7-25-2015
 Author: Stephanie Kovalchik
 Maintainer: Stephanie Kovalchik <s.a.kovalchik@gmail.com>
-Description: This package provides data frames of match-specific and yearly match summary
-    statistics for players on ATP/WTA tour and functions to download match-, year-
-    and surface-specific statistics from the Open Era to the present.
-Depends: plyr, lubridate
+Description: This collection of tools scrape tennis data for the ATP and WTA tours from multipe resources to make easily available to tennis researchers and students of sports statistics.
+Depends: plyr, lubridate, RSelenium
 License: GPL-2
