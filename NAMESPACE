@@ -15,7 +15,9 @@ export(
 	"fetch_wta_rankings",
         "fetch_player_code",
 	"fetch_grandslam_matches",
-	"fetch_matchfacts_from_url"
+	"fetch_matchfacts_from_url",
+	"add_semicolon",
+	"pbp"
 )
 
 
