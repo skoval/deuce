@@ -50,5 +50,5 @@
 #'
 #' @format A data frame with 21,291 rows and 43 variables
 #' @source \url{http://www.tennis-data.co.uk/alldata.php}
-#' @name wta
+#' @name wta_odds
 NULL

@@ -62,5 +62,5 @@
 #'
 #' @format A data frame with 41,402 rows and 55 variables
 #' @source \url{http://www.tennis-data.co.uk/alldata.php}
-#' @name atp
+#' @name atp_odds
 NULL

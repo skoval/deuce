@@ -16,11 +16,13 @@ output
 }
 
 game_score <- function(x){
+	
 	points <- strsplit(x, split = "")[[1]]
 	ace <- grepl("A", points)
 	df <- grepl("D", points)
 	points <- sub("D", "R", sub("A", "S",  points))
 	x <- points == "S"
+	
 	data.frame(
      	serve_won = x > 1 - x,
 		serve_points = cumsum(x),
@@ -59,26 +61,41 @@ tiebreak <- function(x){
 	df <- grepl("D", points)
 	points <- sub("D", "R", sub("A", "S",  points))
 	
-	server1 <- c("S", rep(c("R","R","S","S"), length = length(points)-1))
-	
-	x <- points == server1
+	x <- points == "S"
 	s1 <- cumsum(x)
 	s2 <- cumsum(1 - x)
 	
+	player1 <- c(TRUE, rep(c(FALSE, FALSE, TRUE, TRUE), length = length(points)-1))
+	player1_points <- x # Points won on serve
+	player1_points[!player1] <- (1-x)[!player1] # Not serving
+
+	player2_points <- (1-x)
+	player2_points[!player1] <- x[!player1] # Serving
+
+	player1_points <- cumsum(player1_points)
+	player2_points <- cumsum(player2_points)
+	
+
 	output <- data.frame(
      	serve_won = x > 1 - x,
-		serve_points = cumsum(x),
-		return_points = cumsum(1-x),
-		serve_score = as.character(cumsum(x)),
-		return_score = as.character(cumsum(1-x)),
+		serve_points = player1_points,
+		return_points = player2_points,
 		ace = ace,
 		df = df,
 		stringsAsFactors = FALSE
 	)
+		
+	output$serve_points[!player1] <- player2_points[!player1]
+	output$return_points[!player1] <- player1_points[!player1]
 	
-	if(s1[nrow(output)] > s2[nrow(output)])		        
+	output$serve_score <- as.character(output$serve_points)	
+	output$return_score <- as.character(output$return_points)	
+	
+	if(output$serve_points[nrow(output)] > output$return_points[nrow(output)] )		        
 		output$serve_score[nrow(output)] <- "GM"
-
+	else
+		output$return_score[nrow(output)] <- "GM"
+		
 output
 }
 

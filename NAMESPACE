@@ -17,7 +17,10 @@ export(
 	"fetch_grandslam_matches",
 	"fetch_matchfacts_from_url",
 	"add_semicolon",
-	"pbp"
+	"pbp",
+	"atp_tournaments",
+	"match_win"
+
 )
 
 
