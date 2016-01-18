@@ -1,4 +1,3 @@
-importFrom("plyr", ddply)
 importFrom("lubridate", ymd)
 
 export(
@@ -9,7 +8,6 @@ export(
 	"fetch_summary",
 	"fetch_records",
 	"fetch_rankings_history",
-	"fetch_rankings",
 	"fetch_wta_draw",
 	"fetch_head_to_head",
 	"fetch_wta_rankings",
@@ -19,8 +17,8 @@ export(
 	"add_semicolon",
 	"pbp",
 	"atp_tournaments",
-	"match_win"
-
+	"match_win",
+	"fetch_atp_rankings"
 )
 
 

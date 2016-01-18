@@ -99,9 +99,11 @@ tiebreak <- function(x){
 output
 }
 
+	
 	s1 <- obj$server1
 	s2 <- obj$server2
-
+	date <- obj$tny_date
+	
 	tb_obj <- obj[,c("TB1","TB2","TB3","TB4","TB5")]
 	tb_index <- sapply(tb_obj, is.na)
 	
@@ -172,6 +174,7 @@ output
 		result <- do.call("rbind", lapply(result, function(x) x))
 	}
 	
+	result$tourney_start_date <- date
 	result$breakpoint <- (result$return_score == "40" & !(result$serve_score %in% c("40","Ad"))) | result$return_score == "Ad"
 	
 result
