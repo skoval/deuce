@@ -5,6 +5,12 @@ Version: 0.1
 Date: 7-25-2015
 Author: Stephanie Kovalchik
 Maintainer: Stephanie Kovalchik <s.a.kovalchik@gmail.com>
-Description: This collection of tools scrape tennis data for the ATP and WTA tours from multipe resources to make easily available to tennis researchers and students of sports statistics.
-Depends: dplyr, lubridate, RSelenium
+Description: This collection of tools scrape tennis data for the ATP and WTA
+    tours from multipe resources to make easily available to tennis researchers and
+    students of sports statistics.
+Depends:
+    dplyr,
+    lubridate,
+    RSelenium
 License: GPL-2
+RoxygenNote: 5.0.1
