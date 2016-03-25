@@ -125,6 +125,7 @@ output
 		
 		result <- do.call("rbind", lapply(result, function(x) x))
 		result$serve <- ifelse(result$CumGame %% 2 != 0, s1, s2)
+		result$return <- ifelse(result$CumGame %% 2 != 0, s2, s1)
 		result$tiebreak <- FALSE
 	}
 	else{
@@ -153,11 +154,15 @@ output
 				
 			if(sum(max_game[1:(tb_sets[i]+1)]) %% 2 != 0){
 				tiebreaks[[i]]$serve <- s2
+				tiebreaks[[i]]$return <- s1
 				tiebreaks[[i]]$serve[serve_index] <- s1 # even game + tb goes to first server
+				tiebreaks[[i]]$return[serve_index] <- s2
 				}
 			else{
 				tiebreaks[[i]]$serve <- s1
 				tiebreaks[[i]]$serve[serve_index] <- s2
+				tiebreaks[[i]]$return <- s2
+				tiebreaks[[i]]$return[serve_index] <- s1
 			}
 			tiebreaks[[i]]$tiebreak <- TRUE
 		}
@@ -166,6 +171,7 @@ output
 			result[[i]]$Set <- i
 			result[[i]]$CumGame <- sum(max_game[1:i]) + result[[i]]$Game
 			result[[i]]$serve <- ifelse(result[[i]]$CumGame %% 2 != 0, s1, s2)
+			result[[i]]$return<- ifelse(result[[i]]$CumGame %% 2 != 0, s2, s1)
 			result[[i]]$tiebreak <- FALSE
 			if(any(tb_sets == i))
 				result[[i]] <- rbind(result[[i]], tiebreaks[[which(tb_sets == i)]])
