@@ -64,3 +64,196 @@ fetch_activity <- function(player, year = NULL) {
     
     activity
 } 
+
+
+
+fetch_activity(player, year){
+
+    site <- atp_player_sites$site[atp_player_sites$player == player]
+    site <- paste("http://www.atpworldtour.com/", site, sep = "")
+    site <- sub("overview", "player-activity?year=YEAR", site)
+    site <- sub("YEAR", year, site)
+
+    lines <- readLines(site)
+
+
+    tourneys <- grep("tourney-title", lines)
+    tournament_list <- mapply(function(x, y){lines[x:y]}, x= tourneys, y =c(tourneys[-1], max(tourneys) + 100) )
+
+    extract_fields <- function(lines){
+
+        item_values <- grep("item-value", lines) 
+        tournament_name <- grep("[A-Z]", lines)[1] # First occurrence
+        tournament_name <- sub("(.*title.*>)(.*)(</a.*)", "\\2", lines[tournament_name])
+        tournament_name <- gsub("\t", "", tournament_name)
+
+        date <-  grep("([0-9][0-9][0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9])", lines)[1] # First dates
+        
+        location <-  gsub("\t", "", lines[grep("tourney-location", lines)[1] + 1])
+
+        tier <- grep("categorystamps", lines)[1]
+        tier_name <- sub("(.*categorystamps_)(.*)(_[0-9].*)", "\\2", lines[tier])       
+        tier <- ifelse(tier_name == "1000s", "1000",
+                ifelse(tier_name == "finals-pos", "Tour Finals",
+                    ifelse(tier_name == "grandslam", "Grand Slam", tier_name)))
+
+        draw <- grep("SGL", lines)[1]
+        draw <- item_values[item_values > draw][1] + 1
+
+        surface1 <- grep("door", lines)[1] 
+        surface2 <- grep("(Hard|Grass|Clay)", lines)[1]
+        
+        prize <- grep("Financial", lines)[1]
+        prize <- item_values[item_values > prize][1] + 1
+        prize <- gsub(",", "", lines[prize])
+
+        if(grepl("[0-9]", prize))
+            prize <- sub("(.*[0-9])(\t.*)", "\\1", prize)
+        else
+            prize <- NA
+
+        start_date <- sub("([0-9][0-9][0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9])(.*)","\\1", lines[date])
+        end_date <- sub("([0-9][0-9][0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9].*)(.*)([0-9][0-9][0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9])(.*)","\\3", lines[date])
+        draw_size <-  gsub("\t","", lines[draw])
+
+        if(!is.na(surface1)){
+            surface_type <- ifelse(grepl("Outdoor", lines[surface1]), "Outdoor", "Indoor")
+            if(!is.na(surface2)){
+                surface_type2 <- ifelse(grepl("Hard", lines[surface2]), "Hard",
+                        ifelse(grepl("Clay", lines[surface2]), "Clay", "Grass"))
+                surface_type <- paste(surface_type, surface_type2)
+            }
+        }
+        else{
+            if(!is.na(surface2)){
+                surface_type <- ifelse(grepl("Hard", lines[surface2]), "Hard",
+                        ifelse(grepl("Clay", lines[surface2]), "Clay", "Grass"))
+            }
+            surface_type <- NA
+        }
+
+        matches <- grep("match-stats", lines)
+        
+        scores <- gsub("<sup>", "@", lines[matches])
+        scores <- gsub("</sup>", "!", scores)
+        scores <- sub("(.*>)([0-9].*)(</a>.*)", "\\2", scores)
+
+        games <- strsplit(scores, split =  " ")
+        score_str <- sapply(games, function(x) paste(sub("!", ")", sub("@", "(", x)), collapse = "/"))
+        
+        games_won <- lapply(games, function(x) substr(x, 1, 1))
+        games_lost <- lapply(games, function(x) substr(x, 2, 2))
+
+       tiebreak_won <- lapply(games, function(x){
+            if(any(grepl("@", x))){
+                points <- sapply(x, function(y){
+                    if(grepl("@", y)){
+                      point <- as.numeric(sub("(.*@)([0-9]+)(!.*)", "\\2", y))
+                       if(as.numeric(substr(y, 1, 1)) == 7){
+                        point <- ifelse(point + 2 > 7, point + 2, 7)
+                      }
+                    }
+                    else{
+                      point <- NA  
+                    }
+             point
+            })
+            }
+            else{
+                rep(NA, length(x))
+            }
+        })
+
+
+         tiebreak_lost <- lapply(games, function(x){
+            if(any(grepl("@", x))){
+                points <- sapply(x, function(y){
+                    if(grepl("@", y)){
+                      point <- as.numeric(sub("(.*@)([0-9]+)(!.*)", "\\2", y))
+                       if(as.numeric(substr(y, 1, 1)) != 7){
+                        point <- ifelse(point + 2 > 7, point + 2, 7)
+                      }
+                    }
+                    else{
+                      point <- NA  
+                    }
+             point
+            })
+            }
+            else{
+                rep(NA, length(x))
+            }
+        })
+
+
+        match_urls <- sub("(.*)(en/.*match-stats)(.*)", "\\2", lines[matches]) 
+        
+        event_line <- grep("activity-tournament-caption", lines, val = TRUE)
+
+        if(grepl("This Event Points: [0-9]", event_line))
+            points <- sub("(.*This Event Points: )([0-9]+)(,.*)", "\\2", event_line)
+        else
+            points <- NA
+
+        if(grepl("ATP Ranking", event_line))
+            player_ranking <- sub("(.*ATP Ranking: )([0-9]+)(,.*)", "\\2", event_line)
+        else
+            player_ranking <- NA
+
+
+        # Order: round -> rank -> name -> outcome -> score
+
+        Round_Pattern <- "Round of|Round Robin|Final|Bye"
+        Rounds <- grep(Round_Pattern, lines)
+        Rounds <- Rounds[Rounds > grep("mega-table", lines)]
+        Rounds <- sub("(.*>)(.*)(<.*)", "\\2", lines[Rounds])
+
+        # activity-tournament-caption
+
+    data.frame(
+        name = tournament_name,
+        location = location,
+        start_date = as.Date(start_date, format = "%Y.%m.%d"),
+        end_date = as.Date(end_date, format = "%Y.%m.%d"),  
+        draw = as.numeric(draw_size),
+        matches = as.numeric(draw_size) - 1,
+        surface = surface_type,
+        tier = tier,
+        prize = prize,
+        score = score_str,
+        round = Rounds, 
+        player1 = sapply(games_won, function(x) x[1]),
+        player2 = sapply(games_won, function(x) x[2]),
+        player3 = sapply(games_won, function(x) x[3]),
+        player4 = sapply(games_won, function(x) x[4]),
+        player5 = sapply(games_won, function(x) x[5]),
+        opponent1 = sapply(games_lost, function(x) x[1]),
+        opponent2 = sapply(games_lost, function(x) x[2]),
+        opponent3 = sapply(games_lost, function(x) x[3]),
+        opponent4 = sapply(games_lost, function(x) x[4]),
+        opponent5 = sapply(games_lost, function(x) x[5]),
+        TBplayer1 = sapply(tiebreak_won, function(x) x[1]),
+        TBplayer2 = sapply(tiebreak_won, function(x) x[2]),
+        TBplayer3 = sapply(tiebreak_won, function(x) x[3]),
+        TBplayer4 = sapply(tiebreak_won, function(x) x[4]),
+        TBplayer5 = sapply(tiebreak_won, function(x) x[5]),
+        TBopponent1 = sapply(tiebreak_lost, function(x) x[1]),
+        TBopponent2 = sapply(tiebreak_lost, function(x) x[2]),
+        TBopponent3 = sapply(tiebreak_lost, function(x) x[3]),
+        TBopponent4 = sapply(tiebreak_lost, function(x) x[4]),
+        TBopponent5 = sapply(tiebreak_lost, function(x) x[5])
+    )
+ }
+
+    round
+    opponent_rank
+    player_rank
+    opponent
+    points
+    result
+    score
+
+
+
+
+}
