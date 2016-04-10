@@ -72,11 +72,25 @@ atp_tournaments <- function(challenger = FALSE){
 		draw = as.numeric(draw_size),
 		matches = as.numeric(draw_size) - 1,
 		surface = surface_type,
-		tier = tier,
 		prize = prize
 	)
 	}
 
+	tier <- grep("categorystamps", tournaments)
+	ntournaments <- length(tournament_list)
+	tier <- tier[(length(tier)-ntournaments+1):length(tier)]
+	tier_name <- sub("(.*categorystamps_)(.*)(_[0-9].*)", "\\2", tournaments[tier])		
+	tier <- ifelse(tier_name == "1000s", "1000",
+				ifelse(tier_name == "finals-pos", "Tour Finals",
+					ifelse(tier_name == "grandslam", "Grand Slam", tier_name)))
+
+
 	
-do.call("rbind", lapply(tournament_list, extract_fields))
+	obj <- do.call("rbind", lapply(tournament_list, extract_fields))
+
+	if(challenger)
+		obj$tier <- "challenger"
+	else
+		obj$tier <- tier
+obj	
 }
