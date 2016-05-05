@@ -68,6 +68,10 @@ wins <- function(Lines, Start, Stop) {
 
 fetch_activity <- function(player, year){
 
+	warn.source <- options("warn")$warn
+	on.exit(options(warn = warn.source))
+	options(warn = -1)
+	
     data(atp_player_sites)
     
     site <- atp_player_sites$site[atp_player_sites$player == player]
@@ -75,7 +79,6 @@ fetch_activity <- function(player, year){
     site <- sub("overview", "player-activity?year=YEAR", site)
     site <- sub("YEAR", year, site)
 
-	print(site)
 	
     lines <- readLines(site)
     tourneys_start <- grep("categorystamps", lines)
@@ -91,7 +94,6 @@ fetch_activity <- function(player, year){
         tournament_name <- sub("(.*title.*>)(.*)(</a.*)", "\\2", tournament_name)
         tournament_name <- gsub("\t", "", tournament_name)
 
-    #    print(tournament_name)
 
         date <-  grep("([0-9][0-9][0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9])", lines)[1] # First dates
         location <-  gsub("\t", "", lines[grep("tourney-location", lines)[1] + 1])
@@ -106,7 +108,7 @@ fetch_activity <- function(player, year){
         prize <- gsub(",", "", lines[prize])
 
         if(grepl("[0-9]", prize))
-            prize <- sub("(.*[0-9])(\t.*)", "\\1", prize)
+            prize <- sub("&#163;", "L", sub("(.*[0-9])(\t.*)", "\\1", prize), fixed = TRUE)
         else
             prize <- NA
 
@@ -130,10 +132,8 @@ fetch_activity <- function(player, year){
             surface_type <- NA
         }
 
-        matches <- grep("match-stats|W/O", lines)
+        matches <- grep("match-stats|not-in-system.*[0-9]|W/O", lines)
 
-        if(length(matches) == 0)
-            matches <- grep("not-in-system.*[0-9]", lines)
         scores <- gsub("<sup>", "@", lines[matches])
         scores <- gsub("</sup>", "!", scores)
         scores <- sub("(.*>)([0-9].*)(</a>.*)", "\\2", scores)
@@ -204,9 +204,9 @@ fetch_activity <- function(player, year){
             player_ranking <- sub("(.*ATP Ranking: )([0-9]+)(,.*)", "\\2", event_line)
         else
             player_ranking <- NA
-        # Order: round -> rank -> name -> outcome -> score
 
-        Round_Pattern <- "Round of|Round Robin|Final"
+
+        Round_Pattern <- "Round of|Round Robin|Final|Round Qualifying"
         Rounds <- grep(Round_Pattern, lines)
         Rounds <- Rounds[Rounds > grep("mega-table", lines)]
 
@@ -244,30 +244,31 @@ fetch_activity <- function(player, year){
         round = Rounds, 
         winner = Outcome,
         player = player,
-        player_rank = player_ranking,
+        player_rank = as.numeric(player_ranking),
         opponent = opponents,
-        opponent_rank = Ranks,
-        player1 = sapply(games_won, function(x) x[1]),
-        player2 = sapply(games_won, function(x) x[2]),
-        player3 = sapply(games_won, function(x) x[3]),
-        player4 = sapply(games_won, function(x) x[4]),
-        player5 = sapply(games_won, function(x) x[5]),
-        opponent1 = sapply(games_lost, function(x) x[1]),
-        opponent2 = sapply(games_lost, function(x) x[2]),
-        opponent3 = sapply(games_lost, function(x) x[3]),
-        opponent4 = sapply(games_lost, function(x) x[4]),
-        opponent5 = sapply(games_lost, function(x) x[5]),
-        TBplayer1 = sapply(tiebreak_won, function(x) x[1]),
-        TBplayer2 = sapply(tiebreak_won, function(x) x[2]),
-        TBplayer3 = sapply(tiebreak_won, function(x) x[3]),
-        TBplayer4 = sapply(tiebreak_won, function(x) x[4]),
-        TBplayer5 = sapply(tiebreak_won, function(x) x[5]),
-        TBopponent1 = sapply(tiebreak_lost, function(x) x[1]),
-        TBopponent2 = sapply(tiebreak_lost, function(x) x[2]),
-        TBopponent3 = sapply(tiebreak_lost, function(x) x[3]),
-        TBopponent4 = sapply(tiebreak_lost, function(x) x[4]),
-        TBopponent5 = sapply(tiebreak_lost, function(x) x[5]),
-        row.names = NULL
+        opponent_rank = as.numeric(Ranks),
+        player1 = sapply(games_won, function(x) as.numeric(x[1])),
+        player2 = sapply(games_won, function(x) as.numeric(x[2])),
+        player3 = sapply(games_won, function(x) as.numeric(x[3])),
+        player4 = sapply(games_won, function(x) as.numeric(x[4])),
+        player5 = sapply(games_won, function(x) as.numeric(x[5])),
+        opponent1 = sapply(games_lost, function(x) as.numeric(x[1])),
+        opponent2 = sapply(games_lost, function(x) as.numeric(x[2])),
+        opponent3 = sapply(games_lost, function(x) as.numeric(x[3])),
+        opponent4 = sapply(games_lost, function(x) as.numeric(x[4])),
+        opponent5 = sapply(games_lost, function(x) as.numeric(x[5])),
+        TBplayer1 = sapply(tiebreak_won, function(x) as.numeric(x[1])),
+        TBplayer2 = sapply(tiebreak_won, function(x) as.numeric(x[2])),
+        TBplayer3 = sapply(tiebreak_won, function(x) as.numeric(x[3])),
+        TBplayer4 = sapply(tiebreak_won, function(x) as.numeric(x[4])),
+        TBplayer5 = sapply(tiebreak_won, function(x) as.numeric(x[5])),
+        TBopponent1 = sapply(tiebreak_lost, function(x) as.numeric(x[1])),
+        TBopponent2 = sapply(tiebreak_lost, function(x) as.numeric(x[2])),
+        TBopponent3 = sapply(tiebreak_lost, function(x) as.numeric(x[3])),
+        TBopponent4 = sapply(tiebreak_lost, function(x) as.numeric(x[4])),
+        TBopponent5 = sapply(tiebreak_lost, function(x) as.numeric(x[5])),
+        row.names = NULL,
+        stringsAsFactors = FALSE
     )
   }
 do.call("rbind", lapply(tournament_list, extract_fields))
