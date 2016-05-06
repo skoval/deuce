@@ -18,14 +18,14 @@ fetch_match_stats(player, year)
 }
 
 
-\value for Player 1{
+\value{
 
 Data frame with the columns:
 
 \describe{
-    \item{Time }{ Duration of match in HH:MM:SS if available}
-    \item{Player1}{Character name of player in 1 position}
-    \item{Player2}{Character name of player in 2 position}
+    \item{Time }{ Duration of match in HH:MM:SS if available},
+    \item{Player1}{Character name of player in 1 position},
+    \item{Player2}{Character name of player in 2 position},
     \item{Aces.1}{Numeric of value for Player 1},
 		\item{AcesPercentage.1}{Numeric of value for Player 1},
 		\item{DoubleFaults.1}{Numeric of value for Player 1},
