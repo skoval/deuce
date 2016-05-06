@@ -1,6 +1,7 @@
 importFrom("lubridate", ymd)
 
 export(
+	"fetch_match_stats",
 	"fetch_activity",
 	"fetch_draw",
 	"fetch_demographics",
