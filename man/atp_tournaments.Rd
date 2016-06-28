@@ -3,7 +3,7 @@
 \name{atp_tournaments}
 \alias{atp_tournaments}
 \title{ATP Tournaments}
-\format{A data frame with 67 rows and 8 variables}
+\format{A data frame with 71 rows and 9 variables}
 \source{
 \url{http://www.atpworldtour.com/en/tournaments}
 }
@@ -17,8 +17,10 @@ This dataset contains information on the 2016 ATP tournament calendar:
   \item level. A character name of the tounament level
   \item start_date. A date-time object for the start of the tournament
   \item end_date. A date-time object for the end of the tournament
-  \item single_draw. A character vector of the size of the singles draw
+ \item draw. A numeric vector of the size of the singles draw
+ \item matches. A numeric vector of the number of planned matches 
   \item surface. A character description of the tournament surface
+ \item tier. A character cateogry for the tournament series
   \item prize. A character of the total prize money to earn
 }
 }

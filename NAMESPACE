@@ -20,7 +20,10 @@ export(
 	"atp_tournaments",
 	"match_win",
 	"fetch_atp_rankings",
-	"update_elo"
+	"update_elo",
+	"iid_player_probs",
+	"in_match_win",
+	"importance"
 )
 
 
