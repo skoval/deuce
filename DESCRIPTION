@@ -5,9 +5,7 @@ Version: 1.0
 Date: 2-29-2017
 Author: Stephanie Kovalchik
 Maintainer: Stephanie Kovalchik <s.a.kovalchik@gmail.com>
-Description: This package is a collection of data sources and tools for extracting data for professional men’s and women’s tennis. The data ranges from match results to shot level data.
-Depends:
-    dplyr,
-    lubridate
+Description: This package is a collection of data sources and tools for extracting data for professional men's and women's tennis. The data ranges from match results to shot level data.
+Depends: dplyr, lubridate
 License: GPL-2
-RoxygenNote: 5.0.1
+

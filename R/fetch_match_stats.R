@@ -6,7 +6,9 @@
 #' @param year Numeric year or "all" for all years
 #'
 #'@examples
+#' \dontrun{
 #' fetch_match_stats("Alexander Zverev", 2017)
+#'}
 #'
 #' @export
 #'
