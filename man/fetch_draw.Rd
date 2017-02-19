@@ -28,7 +28,7 @@ data frame of draw results
 This function downloads Grand Slam tournament draws for ATP and WTA singles
 }
 \examples{
-fetch_match_stats("Australian Open", 2017, atp = FALSE)
+fetch_draw("Australian Open", 2017, atp = FALSE)
 
 }
 

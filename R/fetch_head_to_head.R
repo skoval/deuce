@@ -4,6 +4,7 @@
 #'
 #' @param player1 Character name of player (must match name used by source)
 #' @param player2 Character name of player (must match name used by source)
+#' @param atp Logical indicator for ATP or WTA
 #'
 #'@examples
 #' fetch_head_to_head("Rafael Nadal", "Roger Federer")
@@ -20,12 +21,12 @@
 ##'  \item{"loser"}{Character name of loser of match}
 ##'  \item{"score"}{Character of score}
 ##'}
-fetch_head_to_head <- function(player1, player2){
+fetch_head_to_head <- function(player1, player2, atp = TRUE){
 
 	player1 <- gsub(" ","_",player1)
 	player2 <- gsub(" ","_",player2)
 	
-	if(type=="ATP")
+	if(atp)
 		base.url <- "http://www.stevegtennis.com/head-to-head/men/player1/player2/"
 	else
 	    base.url <- "http://www.stevegtennis.com/head-to-head/women/player1/player2/"

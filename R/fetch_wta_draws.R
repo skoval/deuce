@@ -7,7 +7,7 @@
 #' @param atp Logical indicator of ATP or WTA
 #'
 #'@examples
-#' fetch_match_stats("Australian Open", 2017, atp = FALSE)
+#' fetch_draw("Australian Open", 2017, atp = FALSE)
 #'
 #' @export
 #'
