@@ -13,11 +13,11 @@
 #'
 #' @return data frame of rankings for the specified week
 ##' \itemize{
-##'  \item{"player"}{Character name of player}
-##'  \item{"date"}{Date object of Monday rankings were updated}
-##'  \item{"rank"}{Numeric rank}
-##'  \item{"age"}{Numeric of player age}
-##'  \item{"points"}{Numeric of ranking points}
+##'  \item player. Character name of player
+##'  \item date. Date object of Monday rankings were updated
+##'  \item rank. Numeric rank
+##'  \item age. Numeric of player age
+##'  \item points. Numeric of ranking points
 ##'}
 ##'
 fetch_atp_rankings <- function(date, min_rank = 1, max_rank = 100){

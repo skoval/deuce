@@ -16,12 +16,12 @@ fetch_draw(tournament, year, atp = TRUE)
 \value{
 data frame of draw results
 \itemize{
- \item{"winner"}{Name of player who won}                            
- \item{"loser"}{Name of player who lost}                      
- \item{"round"}{Numeric round (7 = Final, 1 = First Round)}                      
- \item{"date"}{Date of start of tournament}            
- \item{"year"}{Numeric of year}              
- \item{"tournament"}{Name of tournament}                
+ \item winner. Name of player who won                            
+ \item loser. Name of player who lost                     
+ \item round. Numeric round (7 = Final, 1 = First Round)                     
+ \item date. Date of start of tournament            
+ \item year. Numeric of year              
+ \item tournament. Name of tournament                
 }
 }
 \description{

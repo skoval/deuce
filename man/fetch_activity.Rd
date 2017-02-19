@@ -14,41 +14,41 @@ fetch_activity(player, year)
 \value{
 data frame of match activity and results
 \itemize{
- \item{"name"}{Character name of tournament}
- \item{"location"}{Character of tournament city and country}
- \item{"start_date"}{Date object of start of tournament}
- \item{"end_date"}{Date object of end of tournament}
- \item{"draw"}{Numeric of main draw size}
- \item{"matches"}{Numeric of total matches played in main draw}
- \item{"surface"}{Character of surface}
- \item{"prize"}{Character of prize money awarded}
- \item{"score"}{Character of match score}
- \item{"round"}{Character of match round}
- \item{"winner"}{Numeric indicator if player won match}
- \item{"player"}{Character name of player}
- \item{"player_rank"}{Numeric of player rank at start of event}
- \item{"opponent"}{Character name of opponent}
- \item{"opponent_rank"}{Numeric of opponent rank at start of event}
- \item{"player1"}{Numeric of player games won in first set, NA if set not played}
- \item{"player2"}{Numeric of player games won in second set, NA if set not played}
- \item{"player3"}{Numeric of player games won in third set, NA if set not played}
- \item{"player4"}{Numeric of player games won in fourth set, NA if set not played}
- \item{"player5"}{Numeric of player games won in fifth set, NA if set not played}
- \item{"opponent1"}{Numeric of opponent games won in first set, NA if set not played}
- \item{"opponent2"}{Numeric of opponent games won in second set, NA if set not played}
- \item{"opponent3"}{Numeric of opponent games won in third set, NA if set not played}
- \item{"opponent4"}{Numeric of opponent games won in fourth set, NA if set not played}
- \item{"opponent5"}{Numeric of opponent games won in fifth set, NA if set not played}
- \item{"TBplayer1"}{Numeric of points won in first set tiebreak, NA if not played}
- \item{"TBplayer2"}{Numeric of points won in second set tiebreak, NA if not played}
- \item{"TBplayer3"}{Numeric of points won in third set tiebreak, NA if not played}
- \item{"TBplayer4"}{Numeric of points won in fourth set tiebreak, NA if not played}
- \item{"TBplayer5"}{Numeric of points won in fifth set tiebreak, NA if not played}
- \item{"TBopponent1"}{Numeric of points won in first set tiebreak, NA if not played}
- \item{"TBopponent2"}{Numeric of points won in second set tiebreak, NA if not played}
- \item{"TBopponent3"}{Numeric of points won in third set tiebreak, NA if not played}
- \item{"TBopponent4"}{Numeric of points won in fourth set tiebreak, NA if not played}
- \item{"TBopponent5"}{Numeric of points won in fifth set tiebreak, NA if not played}
+ \item name. Character name of tournament
+ \item location. Character of tournament city and country
+ \item start_date. Date object of start of tournament
+ \item end_date. Date object of end of tournament
+ \item draw. Numeric of main draw size
+ \item matches. Numeric of total matches played in main draw
+ \item surface. Character of surface
+ \item prize. Character of prize money awarded
+ \item score. Character of match score
+ \item round. Character of match round
+ \item winner. Numeric indicator if player won match
+ \item player. Character name of player
+ \item player_rank. Numeric of player rank at start of event
+ \item opponent. Character name of opponent
+ \item opponent_rank. Numeric of opponent rank at start of event
+ \item player1. Numeric of player games won in first set, NA if set not played
+ \item player2. Numeric of player games won in second set, NA if set not played
+ \item player3. Numeric of player games won in third set, NA if set not played
+ \item player4. Numeric of player games won in fourth set, NA if set not played
+ \item player5. Numeric of player games won in fifth set, NA if set not played
+ \item opponent1. Numeric of opponent games won in first set, NA if set not played
+ \item opponent2. Numeric of opponent games won in second set, NA if set not played
+ \item opponent3. Numeric of opponent games won in third set, NA if set not played
+ \item opponent4. Numeric of opponent games won in fourth set, NA if set not played
+ \item opponent5. Numeric of opponent games won in fifth set, NA if set not played
+ \item TBplayer1. Numeric of points won in first set tiebreak, NA if not played
+ \item TBplayer2. Numeric of points won in second set tiebreak, NA if not played
+ \item TBplayer3. Numeric of points won in third set tiebreak, NA if not played
+ \item TBplayer4. Numeric of points won in fourth set tiebreak, NA if not played
+ \item TBplayer5. Numeric of points won in fifth set tiebreak, NA if not played
+ \item TBopponent1. Numeric of points won in first set tiebreak, NA if not played
+ \item TBopponent2. Numeric of points won in second set tiebreak, NA if not played
+ \item TBopponent3. Numeric of points won in third set tiebreak, NA if not played
+ \item TBopponent4. Numeric of points won in fourth set tiebreak, NA if not played
+ \item TBopponent5. Numeric of points won in fifth set tiebreak, NA if not played
 }
 }
 \description{

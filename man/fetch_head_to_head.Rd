@@ -16,13 +16,13 @@ fetch_head_to_head(player1, player2, atp = TRUE)
 \value{
 data frame of match activity and results
 \itemize{
- \item{"year"}{Numeric of year of match}
- \item{"tournament"}{Character name of tournament}
- \item{"round"}{Character of round of match}
- \item{"surface"}{Character of surface}
- \item{"winner"}{Character name of winner of match}
- \item{"loser"}{Character name of loser of match}
- \item{"score"}{Character of score}
+ \item year. Numeric of year of match
+ \item tournament. Character name of tournament
+ \item round. Character of round of match
+ \item surface. Character of surface
+ \item winner. Character name of winner of match
+ \item loser. Character name of loser of match
+ \item score. Character of score
 }
 }
 \description{
