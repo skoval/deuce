@@ -1,72 +1,70 @@
-surface <- function(string) {
-    if (length(grep("Hard", string)) == 1) 
-        "Hard" else if (length(grep("Grass", string)) == 1) 
-        "Grass" else "Clay"
-}
-
-surface <- Vectorize(surface)
-
-losses <- function(Lines, Start, Stop) length(grep("L&", Lines[Start:Stop]))
-
-wins <- function(Lines, Start, Stop) {
-    length(grep("W&", Lines[Start:Stop])) - length(grep("Bye", Lines[Start:Stop]))
-}
-
-# fetch_activity <- function(player, year = NULL) {
-    
-    
-#     call <- fetch_url(player)
-#     if (is.na(call)) 
-#         stop("Player not found.")
-    
-#     if(is.null(year)) year <- 0
-    
-#     call <- collapse("http://www.atpworldtour.com/", call, "?t=pa&y=year&m=s&e=0#")
-#     call <- sub("year", year, call)
-#     call <- url(call)
-    
-#     lines <- readLines(call, ok = TRUE, warn = FALSE, encoding = "UTF-8")
-    
-#     close(call)
-    
-#     if(year == 0)
-# 	    year_pattern <- "\\.[1|2][0-9][0-9][0-9];"
-# 	else
-# 		year_pattern <- paste("\\.", year, ";", sep = "")
-		
-#     tournaments <- grep(year_pattern, lines)
-#     points <- grep("This Event Points|ATP Ranking", lines)
-    
-#     if ((length(tournaments) != length(points)) & year != 0) {
-#         year_pattern <- paste(".", as.numeric(year) - 1, ";", sep = "")
-#         tournaments <- sort(c(tournaments, grep(year_pattern, lines)))
-#     }
-    
-#     date <- sub("(.*;)([0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9][0-9][0-9])(;.*)", "\\2", lines[tournaments])
-#     tournament_names <- sub("(.*<strong>)(.*)(</strong>.*)", "\\2", lines[tournaments])
-#     result <- sub("(.*<td>)(.*)(</td>.*)", "\\2", lines[points - 14])
-    
-#     start <- tournaments
-#     stop <- points
-    
-#     W <- mapply(wins, Start = start, Stop = stop, MoreArgs = list(Lines = lines))
-#     L <- mapply(losses, Start = start, Stop = stop, MoreArgs = list(Lines = lines))
-    
-#     the_date <- as.Date(date, "%d.%m.%Y")
-#     dates <- strsplit(date, split = ".", fixed = TRUE)
-    
-#     day <- as.numeric(sapply(dates, function(x) x[1]))
-#     month <- as.numeric(sapply(dates, function(x) x[2]))
-#     year <- as.numeric(sapply(dates, function(x) x[3]))
-    
-#     activity <- data.frame(day = day, month = month, year = year, date = the_date, tournament = tournament_names, result = result, wins = W, 
-#         losses = L, surface = as.character(surface(lines[tournaments])))
-    
-#     activity
-# } 
-
-
+#' Download Player Activity
+#'
+#' This function extracts match activity and results for ATP players
+#'
+#' @param player Character name of ATP player
+#' @param year Numeric year or "all" for all years
+#'
+#'@examples
+#' fetch_activity("Rafael Nadal", 2016)
+#' fetch_activity("Alexander Zverev", "all")
+#'
+#' @export
+#'
+#' @return data frame of match activity and results
+##' \itemize{
+##'  \item{"name"}{Character name of tournament}
+##'  \item{"location"}{Character of tournament city and country}
+##'  \item{"start_date"}{Date object of start of tournament}
+##'  \item{"end_date"}{Date object of end of tournament}
+##'  \item{"draw"}{Numeric of main draw size}
+##'  \item{"matches"}{Numeric of total matches played in main draw}
+##'  \item{"surface"}{Character of surface}
+##'  \item{"prize"}{Character of prize money awarded}
+##'  \item{"score"}{Character of match score}
+##'  \item{"round"}{Character of match round}
+##'  \item{"winner"}{Numeric indicator if player won match}
+##'  \item{"player"}{Character name of player}
+##'  \item{"player_rank"}{Numeric of player rank at start of event}
+##'  \item{"opponent"}{Character name of opponent}
+##'  \item{"opponent_rank"}{Numeric of opponent rank at start of event}
+##'  \item{"player1"}{Numeric of player games won in first set, NA if set not played}
+##'  \item{"player2"}{Numeric of player games won in second set, NA if set not played}
+##'  \item{"player3"}{Numeric of player games won in third set, NA if set not played}
+##'  \item{"player4"}{Numeric of player games won in fourth set, NA if set not played}
+##'  \item{"player5"}{Numeric of player games won in fifth set, NA if set not played}
+##'  \item{"opponent1"}{Numeric of opponent games won in first set, NA if set not played}
+##'  \item{"opponent2"}{Numeric of opponent games won in second set, NA if set not played}
+##'  \item{"opponent3"}{Numeric of opponent games won in third set, NA if set not played}
+##'  \item{"opponent4"}{Numeric of opponent games won in fourth set, NA if set not played}
+##'  \item{"opponent5"}{Numeric of opponent games won in fifth set, NA if set not played}
+##'  \item{"TBplayer1"}{Numeric of points won in first set tiebreak, NA if not played}
+##'  \item{"TBplayer2"}{Numeric of points won in second set tiebreak, NA if not played}
+##'  \item{"TBplayer3"}{Numeric of points won in third set tiebreak, NA if not played}
+##'  \item{"TBplayer4"}{Numeric of points won in fourth set tiebreak, NA if not played}
+##'  \item{"TBplayer5"}{Numeric of points won in fifth set tiebreak, NA if not played}
+##'  \item{"TBopponent1"}{Numeric of points won in first set tiebreak, NA if not played}
+##'  \item{"TBopponent2"}{Numeric of points won in second set tiebreak, NA if not played}
+##'  \item{"TBopponent3"}{Numeric of points won in third set tiebreak, NA if not played}
+##'  \item{"TBopponent4"}{Numeric of points won in fourth set tiebreak, NA if not played}
+##'  \item{"TBopponent5"}{Numeric of points won in fifth set tiebreak, NA if not played}
+##' }
+##'
 fetch_activity <- function(player, year){
+
+	surface <- function(string) {
+	    if (length(grep("Hard", string)) == 1) 
+	        "Hard" else if (length(grep("Grass", string)) == 1) 
+	        "Grass" else "Clay"
+	}
+	
+	surface <- Vectorize(surface)
+	
+	losses <- function(Lines, Start, Stop) length(grep("L&", Lines[Start:Stop]))
+	
+	wins <- function(Lines, Start, Stop) {
+	    length(grep("W&", Lines[Start:Stop])) - length(grep("Bye", Lines[Start:Stop]))
+	}
 
 	warn.source <- options("warn")$warn
 	on.exit(options(warn = warn.source))
@@ -74,13 +72,23 @@ fetch_activity <- function(player, year){
 	
     data(atp_player_sites)
     
+    
     site <- atp_player_sites$site[atp_player_sites$player == player]
+    
+    if(length(site) == 0){
+    	site <- atp_player_sites$site[grep(player, atp_player_sites$player)][1]
+    }
+    
+    if(length(site) == 0)
+    	stop("Player not found. Check spelling.")
+    	
     site <- paste("http://www.atpworldtour.com/", site, sep = "")
-    site <- sub("overview", "player-activity?year=YEAR", site)
+    site <- sub("overview", "player-activity?year=YEAR&matchType=singles", site)
     site <- sub("YEAR", year, site)
 
 	
     lines <- readLines(site)
+    
     tourneys_start <- grep("categorystamps", lines)
     tourneys_stop <- grep("This Event", lines)
 
@@ -88,8 +96,10 @@ fetch_activity <- function(player, year){
 
     extract_fields <- function(lines){
 
+		
         item_values <- grep("item-value", lines) 
 
+	
         tournament_name <- grep("[A-Z]", lines[grep("tourney-title", lines):length(lines)], val = TRUE)[1] # First occurrence
         tournament_name <- sub("(.*title.*>)(.*)(</a.*)", "\\2", tournament_name)
         tournament_name <- gsub("\t", "", tournament_name)
@@ -181,6 +191,7 @@ fetch_activity <- function(player, year){
                 rep(NA, length(x))
             }
         })
+        
         match_urls <- sub("(.*)(en/.*match-stats)(.*)", "\\2", lines[matches]) 
 
         # Checks for W/O
@@ -193,6 +204,7 @@ fetch_activity <- function(player, year){
             tiebreak_lost[walkover] <- NA
             match_urls[walkover] <- NA
         }
+        
         event_line <- grep("activity-tournament-caption", lines, val = TRUE)
 
         if(grepl("This Event Points: [0-9]", event_line))
@@ -206,7 +218,7 @@ fetch_activity <- function(player, year){
             player_ranking <- NA
 
 
-        Round_Pattern <- "Round of|Round Robin|Final|Round Qualifying"
+        Round_Pattern <- "Olympic|Round of|Round Robin|Final|Round Qualifying"
         Rounds <- grep(Round_Pattern, lines)
         Rounds <- Rounds[Rounds > grep("mega-table", lines)]
 
@@ -219,7 +231,7 @@ fetch_activity <- function(player, year){
             sub("([0-9]+)(.*)", "\\1", lines[x:y][where_ranks][1])
             }, x = Round_Lines, y = Player_Lines)
         Outcome <- mapply(function(x, y){
-            win <- any(grepl("W", lines[(x+1):y]))
+            win <- any(grepl("^W", lines[(x+1):y]))
             ifelse(win, 1, 0)
             }, x = Player_Lines, y = Player_Lines + 5)
         Rounds <- sub("(.*>)(.*)(<.*)", "\\2", lines[Rounds])
@@ -271,5 +283,7 @@ fetch_activity <- function(player, year){
         stringsAsFactors = FALSE
     )
   }
+  
+  
 do.call("rbind", lapply(tournament_list, extract_fields))
 }

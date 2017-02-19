@@ -1,6 +1,6 @@
 #' ATP Playing Activity
 #'
-#' This dataset contains summaries of the outcomes of ATP matches of current and past players for the ATP World Tour. Match statistics are available for most matches from 1991 to the present, excluding Davis Cup. The variables of the dataset are:
+#' This dataset contains summaries of the outcomes of ATP matches of current and past players for the ITF and ATP World Tour. Match statistics are available for most matches from 1991 to the present, excluding Davis Cup. The variables of the dataset are:
 #'
 #' \itemize{
 #'   \item tourney_id. A character id that uniquely identifies each tournament
@@ -8,7 +8,6 @@
 #'   \item surface. A character description of the court surface (Carpet, Clay, Grass, or Hard)
 #'   \item draw_size. A numeric value indicating the draw size
 #'   \item tourney_level. A character description of the tournament level (A, C, D, F, G, M)
-#'   \item tourney_start_date. The date of the first day of the tournament (not the match) as as POSIXct class
 #'   \item match_num. A numeric indicating the order of matches
 #'   \item winner_id. A numeric id identifying the player who won the match
 #'   \item winner_seed. A numeric value for the winner's seeding
@@ -73,9 +72,12 @@
 #'   \item LTB4. A numeric value for the number of points won by the loser in the fourth set tiebreak
 #'   \item WTB5. A numeric value for the number of points won by the winner in the fifth set tiebreak
 #'   \item LTB5. A numeric value for the number of points won by the loser in the fifth set tiebreak
+#'   \item tourney_start_date. The date of the first day of the tournament (not the match) as as POSIXct class
+#'   \item year. Numeric of the year match occurred. 
+#'   \item match_id. Character identifier of the match.
 #'}
 #'
-#' @format A data frame with 159,454 rows and 70 variables
+#' @format A data frame with 667,965 rows and 72 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_atp}
 #' @name atp_matches
 NULL

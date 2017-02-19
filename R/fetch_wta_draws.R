@@ -1,6 +1,31 @@
-fetch_wta_draw <- function(tournament, year){
+#' Download Grand Slam Draws
+#'
+#' This function downloads Grand Slam tournament draws for ATP and WTA singles
+#'
+#' @param tournament Name of Grand Slam
+#' @param year Numeric year of event
+#' @param atp Logical indicator of ATP or WTA
+#'
+#'@examples
+#' fetch_match_stats("Australian Open", 2017, atp = FALSE)
+#'
+#' @export
+#'
+#' @return data frame of draw results
+##' \itemize{
+##'  \item{"winner"}{Name of player who won}                            
+##'  \item{"loser"}{Name of player who lost}                      
+##'  \item{"round"}{Numeric round (7 = Final, 1 = First Round)}                      
+##'  \item{"date"}{Date of start of tournament}            
+##'  \item{"year"}{Numeric of year}              
+##'  \item{"tournament"}{Name of tournament}                
+##'}
+fetch_draw <- function(tournament, year, atp = TRUE){
 
-	base_url <- "http://www.stevegtennis.com/draw-results/wta/tournament/yyyy/"
+	if(atp)
+		base_url <- "http://www.stevegtennis.com/draw-results/atp/tournament/yyyy/"	
+	else
+		base_url <- "http://www.stevegtennis.com/draw-results/wta/tournament/yyyy/"
 	
 	tournaments <- c("US_Open","Wimbledon","Australian_Open","French_Open_-%20Roland%20Garros")
 	
@@ -56,6 +81,7 @@ fetch_wta_draw <- function(tournament, year){
 	
 	result$date <- ymd(result$date)
 	result$year <- year(result$date)
+	result$tournament <- tournament
 	
 result
 }

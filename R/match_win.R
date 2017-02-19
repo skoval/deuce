@@ -1,6 +1,6 @@
 #' Match Win Probability
 #'
-#' Match win probability under an IID model
+#' Match win probability given serve and return performance and assuming points in a match are i.i.d
 #'
 #' @param serve probability that favored player wins a point on serve
 #' @param return probability that favored player wins a point on return

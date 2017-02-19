@@ -58,9 +58,10 @@
 #'   \item AvgW. A numeric Average odds of match winner (as shown by Oddsportal.com)
 #'   \item AvgL. A numeric Average odds of match loser (as shown by Oddsportal.com)
 #'   \item url. A character with the url page for the tournament CSV files
+#'   \item Year. Numeric value of the year of the match
 #'}
 #'
-#' @format A data frame with 41,402 rows and 55 variables
+#' @format A data frame with 45,163 rows and 56 variables
 #' @source \url{http://www.tennis-data.co.uk/alldata.php}
 #' @name atp_odds
 NULL

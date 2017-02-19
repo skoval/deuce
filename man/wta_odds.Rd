@@ -3,7 +3,7 @@
 \name{wta_odds}
 \alias{wta_odds}
 \title{WTA Match Odds}
-\format{A data frame with 21,291 rows and 43 variables}
+\format{A data frame with 24,950 rows and 44 variables}
 \source{
 \url{http://www.tennis-data.co.uk/alldata.php}
 }
@@ -55,6 +55,7 @@ This dataset contains outcomes of matches on the WTA Tour from 2007 forward alon
   \item AvgW. A numeric Average odds of match winner (as shown by Oddsportal.com)
   \item AvgL. A numeric Average odds of match loser (as shown by Oddsportal.com)
   \item url. A character with the url page for the tournament CSV files
+  \item Year. Numeric value of the year of the match
 }
 }
 

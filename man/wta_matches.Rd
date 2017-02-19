@@ -3,12 +3,12 @@
 \name{wta_matches}
 \alias{wta_matches}
 \title{WTA Playing Activity}
-\format{A data frame with 102,041 rows and 70 variables}
+\format{A data frame with 400,212 rows and 72 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_wta}
 }
 \description{
-This dataset contains summaries of the outcomes of WTA matches of current and past players for the WTA World Tour. Match statistics are not available only results. The variables of the dataset are:
+This dataset contains summaries of the outcomes of WTA matches of current and past players for the ITF and WTA Tour. Match statistics are not available only results. The variables of the dataset are:
 }
 \details{
 \itemize{
@@ -17,7 +17,6 @@ This dataset contains summaries of the outcomes of WTA matches of current and pa
   \item surface. A character description of the court surface (Carpet, Clay, Grass, or Hard)
   \item draw_size. A numeric value indicating the draw size
   \item tourney_level. A character description of the tournament level
-  \item tourney_start_date. The date of the first day of the tournament (not the match) as as POSIXct class
   \item match_num. A numeric indicating the order of matches
   \item winner_id. A numeric id identifying the player who won the match
   \item winner_seed. A numeric value for the winner's seeding
@@ -63,6 +62,9 @@ This dataset contains summaries of the outcomes of WTA matches of current and pa
   \item LTB4. A numeric value for the number of points won by the loser in the fourth set tiebreak
   \item WTB5. A numeric value for the number of points won by the winner in the fifth set tiebreak
   \item LTB5. A numeric value for the number of points won by the loser in the fifth set tiebreak
+  \item tourney_start_date. The date of the first day of the tournament (not the match) as as POSIXct class
+  \item year. Numeric of the year match occurred. 
+  \item match_id. Character identifier of the match.
 }
 }
 

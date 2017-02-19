@@ -3,7 +3,7 @@
 \name{point_by_point}
 \alias{point_by_point}
 \title{Point by Point Match Data}
-\format{A data frame with 79,345 rows and 40 variables}
+\format{A data frame with 89,164 rows and 40 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_pointbypoint}
 }
@@ -12,7 +12,7 @@ This dataset contains point-by-point data for the men's and women's tours. The v
 }
 \details{
 \itemize{
-  \item dat. A character id that uniquely identifies each tournament
+  \item date. A character id that uniquely identifies each tournament
   \item tny_name. A character tournament name
   \item tour. A character indicator of the tour for which the match was played ( ATP, CH, FU, ITF, WTA )
   \item draw. A character indicating if the match was part of the main draw of qualifying (Main, Qual)
@@ -41,7 +41,7 @@ This dataset contains point-by-point data for the men's and women's tours. The v
   \item LTB4. A numeric value for the number of points won by the loser in the fourth set tiebreak
   \item WTB5. A numeric value for the number of points won by the winner in the fifth set tiebreak
   \item LTB5. A numeric value for the number of points won by the loser in the fifth set tiebreak
-  \item Set1. A character of the point outcomes for the first set, in relation to the game's server (S = server won, R = Returner won)
+  \item Set1. A character of the point outcomes for the first set, in relation to the game's server (S = server won, R = Returner won, A = Ace, D = DoubleFault). Games are separated by a semicolon.
   \item Set2. A character of the point outcomes for the second set
   \item Set3. A character of the point outcomes for the third set
   \item Set4. A character of the point outcomes for the fourth set

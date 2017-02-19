@@ -14,6 +14,6 @@ match_win(serve, return, bestof3 = TRUE)
 \item{bestof3}{logical indicator whether best-of-3 match (TRUE) or best-of-5 (FALSE)}
 }
 \description{
-Match win probability under an IID model
+Match win probability given serve and return performance and assuming points in a match are i.i.d
 }
 

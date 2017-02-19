@@ -3,12 +3,12 @@
 \name{atp_tournaments}
 \alias{atp_tournaments}
 \title{ATP Tournaments}
-\format{A data frame with 71 rows and 9 variables}
+\format{A data frame with 127 rows and 9 variables}
 \source{
 \url{http://www.atpworldtour.com/en/tournaments}
 }
 \description{
-This dataset contains information on the 2016 ATP tournament calendar:
+This dataset contains events for the 2017 ATP World Tour and ATP Challenger Tour:
 }
 \details{
 \itemize{

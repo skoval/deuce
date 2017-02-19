@@ -4,26 +4,11 @@ export(
 	"fetch_match_stats",
 	"fetch_activity",
 	"fetch_draw",
-	"fetch_demographics",
-	"fetch_matchfacts",
-	"fetch_summary",
-	"fetch_records",
-	"fetch_rankings_history",
-	"fetch_wta_draw",
 	"fetch_head_to_head",
-	"fetch_wta_rankings",
-        "fetch_player_code",
-	"fetch_grandslam_matches",
-	"fetch_matchfacts_from_url",
-	"add_semicolon",
-	"pbp",
-	"atp_tournaments",
+	"fetch_atp_tournaments",
 	"match_win",
 	"fetch_atp_rankings",
-	"update_elo",
-	"iid_player_probs",
-	"in_match_win",
-	"importance"
+	"elo_prediction"
 )
 
 

@@ -10,7 +10,7 @@
 #'   \item date. Date of ranking as POSIXct class
 #' }
 #'
-#' @format A data frame with  2,018,364 rows and 5 variables
+#' @format A data frame with 2,593,632 rows and 5 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_atp}
 #' @name atp_rankings
 NULL

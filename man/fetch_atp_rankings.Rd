@@ -13,7 +13,21 @@ fetch_atp_rankings(date, min_rank = 1, max_rank = 100)
 
 \item{max_rank}{A numeric for the lowest ranked player to include}
 }
+\value{
+data frame of rankings for the specified week
+\itemize{
+ \item{"player"}{Character name of player}
+ \item{"date"}{Date object of Monday rankings were updated}
+ \item{"rank"}{Numeric rank}
+ \item{"age"}{Numeric of player age}
+ \item{"points"}{Numeric of ranking points}
+}
+}
 \description{
 This function extracts ATP singles rankings for a particular date and ranking group
+}
+\examples{
+fetch_atp_rankings("2017-01-01")
+
 }
 

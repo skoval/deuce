@@ -3,7 +3,7 @@
 \name{wta_players}
 \alias{wta_players}
 \title{Biographic Details of WTA Players}
-\format{A data frame with 15,366 rows and 8 variables}
+\format{A data frame with 20,289 rows and 9 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_wta}
 }
@@ -19,6 +19,7 @@ This dataset contains the names and basic demographic details of current and pas
   \item hand. A character indicating handedness type: L = left, R = right, U = unknown, A = ambidextrous
   \item birthdate. A numeric birthdate, YYYYYMMDD
   \item country_code. A character of 3-letter codes for country
+ \item invalid. Logical if whether player names has any blanks or missing values.
   \item name. A character of player full names, first name + last name
   \item dob. Date of birth as POSIXct class
 }

@@ -3,7 +3,7 @@
 \name{atp_players}
 \alias{atp_players}
 \title{Biographic Details of ATP Players}
-\format{A data frame with 45,305 rows and 8 variables}
+\format{A data frame with 52,167 rows and 9 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_atp}
 }
@@ -19,6 +19,7 @@ This dataset contains the names and basic demographic details of current and pas
   \item hand. A character indicating handedness type: L = left, R = right, U = unknown, A = ambidextrous
   \item birthdate. A numeric birthdate, YYYYYMMDD
   \item country_code. A character of 3-letter codes for country
+ \item invalid. Logical if whether player names has any blanks or missing values.
   \item name. A character of player full names, first name + last name
   \item dob. Date of birth as POSIXct class
 }

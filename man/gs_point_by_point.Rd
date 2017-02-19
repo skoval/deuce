@@ -3,7 +3,7 @@
 \name{gs_point_by_point}
 \alias{gs_point_by_point}
 \title{Grand Slam Point by Point Match Data}
-\format{A data frame with 657,051 rows and 84 variables}
+\format{A data frame with 832,477 rows and 85 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_slam_pointbypoint}
 }
@@ -12,6 +12,8 @@ This dataset contains point-by-point data for men's and women's Grand Slams from
 }
 \details{
 \itemize{
+  \item Tour. Character of tour for match
+  \item id. Character of the score id
   \item match_id. A character id that uniquely identifies each match
   \item ElapsedTime. A character time (H:MM:SS) for the match time a the start of the point
   \item SetNo. A numeric value indicating the set number
@@ -77,6 +79,10 @@ This dataset contains point-by-point data for men's and women's Grand Slams from
 \item WinnerShotType. A character indicator ("B" or "F")
 \item P1DistanceRun. Distance run in point by player 1
 \item P2DistanceRun. Distance run in point by player 2
+\item RallyCount. Numeric length of rally
+\item ServeWidth. Categorical value of serve width
+\item ServeDepth. Categorical value of service depth
+\item ReturnDepth. Categorical value of return depth
 \item year. A numeric value for year of match
 \item slam. A character value indicating the Grand Slam match was played in
 \item match_num. A numerical ID for the match within tournament
@@ -98,8 +104,7 @@ This dataset contains point-by-point data for men's and women's Grand Slams from
   \item P2GamesWonStart. A numeric value for the number of games won by player 2 at the start of the point
   \item P1ScoreStart. A numeric value for the score of player 1 at the start of the point
   \item P2ScoreStart. A numeric value for the score of player 2 at the start of the point
-  \item P1MatchPoint. A numeric value indicating whether the current point is a match point for player 1
-  \item P2MatchPoint. A numeric value indicating whether the current point is a match point for player 2
+  \item importance. Numeric of point importance
 }
 }
 

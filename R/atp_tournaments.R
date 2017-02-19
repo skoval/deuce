@@ -1,4 +1,11 @@
-atp_tournaments <- function(challenger = FALSE){
+#' Download Current ATP Calendar
+#'
+#' This function downloads the ATP calendar
+#'
+#' @param challenger Logical indicator if fetching challenger or World Tour calendar
+#'
+#' @export
+fetch_atp_tournaments <- function(challenger = FALSE){
 	
 	if(challenger){
 		tournaments <- readLines("http://www.atpworldtour.com/en/atp-challenger-tour/calendar")
