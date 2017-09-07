@@ -39,7 +39,7 @@ There are some analytic functions and some functions for fetching additional ten
 `elo_prediction(2100, 1950)`
 
 
-An example of one of the data-scraping functions is `fetch_activivty`. When connected to the Internet, this can be used to retrieve the match results for an ATP player for a specific year of for their career. As an example, let's show how we would fetch the 2017 match results for Rafael Nadal.
+An example of one of the data-scraping functions is `fetch_activity`. When connected to the Internet, this can be used to retrieve the match results for an ATP player for a specific year of for their career. As an example, let's show how we would fetch the 2017 match results for Rafael Nadal.
 
 `fetch_activity("Rafael Nadal", 2017)`
 
