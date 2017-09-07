@@ -79,4 +79,3 @@ This dataset contains detailed charting of professional tennis matches from Jeff
 	 \item match_date. Date format of the match date
 }
 }
-

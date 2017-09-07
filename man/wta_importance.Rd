@@ -25,4 +25,3 @@ This dataset the importance of points for different scorelines in Grand Slam mat
   \item id. Character score id
 }
 }
-

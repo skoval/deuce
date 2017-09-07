@@ -59,4 +59,3 @@ fetch_activity("Rafael Nadal", 2016)
 fetch_activity("Alexander Zverev", "all")
 
 }
-

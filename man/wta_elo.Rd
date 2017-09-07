@@ -30,4 +30,3 @@ This dataset contains Elo ratings for the WTA tour from the Open Era to the pres
   \item prediction. Numeric match win probability for the player
 }
 }
-

@@ -12,4 +12,3 @@ fetch_atp_tournaments(challenger = FALSE)
 \description{
 This function downloads the ATP calendar
 }
-

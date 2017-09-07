@@ -70,4 +70,3 @@ This dataset contains outcomes of matches on the ATP Tour from 2000 forward alon
   \item Year. Numeric value of the year of the match
 }
 }
-

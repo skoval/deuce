@@ -58,4 +58,3 @@ This dataset contains outcomes of matches on the WTA Tour from 2007 forward alon
   \item Year. Numeric value of the year of the match
 }
 }
-

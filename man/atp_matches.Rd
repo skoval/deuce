@@ -86,4 +86,3 @@ This dataset contains summaries of the outcomes of ATP matches of current and pa
   \item match_id. Character identifier of the match.
 }
 }
-

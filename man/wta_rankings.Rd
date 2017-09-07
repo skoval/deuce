@@ -19,4 +19,3 @@ This dataset contains the ranking history of current and past players for the WT
   \item date. Date of ranking as POSIXct class
 }
 }
-

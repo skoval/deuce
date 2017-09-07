@@ -21,4 +21,3 @@ This function returns the prediction for a match based on player Elo ratings
 elo_prediction(2000, 1842)
 
 }
-

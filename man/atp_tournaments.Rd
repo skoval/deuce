@@ -24,4 +24,3 @@ This dataset contains events for the 2017 ATP World Tour and ATP Challenger Tour
   \item prize. A character of the total prize money to earn
 }
 }
-

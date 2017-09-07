@@ -16,4 +16,3 @@ match_win(serve, return, bestof3 = TRUE)
 \description{
 Match win probability given serve and return performance and assuming points in a match are i.i.d
 }
-

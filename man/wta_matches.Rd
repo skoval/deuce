@@ -67,4 +67,3 @@ This dataset contains summaries of the outcomes of WTA matches of current and pa
   \item match_id. Character identifier of the match.
 }
 }
-

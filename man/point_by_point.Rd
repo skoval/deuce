@@ -53,4 +53,3 @@ This dataset contains point-by-point data for the men's and women's tours. The v
   \item TB5. A character of the point outcomes for the fifth tiebreak
 }
 }
-

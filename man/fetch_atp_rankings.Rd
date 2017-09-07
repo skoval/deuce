@@ -30,4 +30,3 @@ This function extracts ATP singles rankings for a particular date and ranking gr
 fetch_atp_rankings("2017-01-01")
 
 }
-

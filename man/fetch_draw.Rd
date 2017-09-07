@@ -31,4 +31,3 @@ This function downloads Grand Slam tournament draws for ATP and WTA singles
 fetch_draw("Australian Open", 2017, atp = FALSE)
 
 }
-

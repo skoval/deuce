@@ -32,4 +32,3 @@ This function extracts head-to-heads for WTA and ATP players from \url{http://ww
 fetch_head_to_head("Rafael Nadal", "Roger Federer")
 
 }
-

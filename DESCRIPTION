@@ -1,7 +1,7 @@
 Package: deuce
 Type: Package
 Title: Resources for Analysis of Professional Tennis Data
-Version: 1.0
+Version: 1.1
 Date: 2-29-2017
 Author: Stephanie Kovalchik
 Maintainer: Stephanie Kovalchik <s.a.kovalchik@gmail.com>
@@ -12,4 +12,4 @@ Depends:
     dplyr,
     lubridate
 License: GPL-2
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
