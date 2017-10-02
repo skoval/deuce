@@ -3,7 +3,7 @@
 \name{point_by_point}
 \alias{point_by_point}
 \title{Point by Point Match Data}
-\format{A data frame with 89,164 rows and 40 variables}
+\format{A data frame with 124,247 rows and 40 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_pointbypoint}
 }

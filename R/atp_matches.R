@@ -77,7 +77,7 @@
 #'   \item match_id. Character identifier of the match.
 #'}
 #'
-#' @format A data frame with 667,965 rows and 72 variables
+#' @format A data frame with 687,959 rows and 72 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_atp}
 #' @name atp_matches
 NULL

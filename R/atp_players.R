@@ -15,7 +15,7 @@
 #'   \item dob. Date of birth as POSIXct class
 #' }
 #'
-#' @format A data frame with 52,167 rows and 9 variables
+#' @format A data frame with 52,717 rows and 9 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_atp}
 #' @name atp_players
 NULL

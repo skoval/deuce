@@ -3,7 +3,7 @@
 \name{atp_players}
 \alias{atp_players}
 \title{Biographic Details of ATP Players}
-\format{A data frame with 52,167 rows and 9 variables}
+\format{A data frame with 52,717 rows and 9 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_atp}
 }

@@ -3,7 +3,7 @@
 \name{gs_point_by_point}
 \alias{gs_point_by_point}
 \title{Grand Slam Point by Point Match Data}
-\format{A data frame with 832,477 rows and 85 variables}
+\format{A data frame with 950,944 rows and 85 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_slam_pointbypoint}
 }

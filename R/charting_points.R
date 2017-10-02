@@ -70,7 +70,7 @@
 #' 	 \item match_date. Date format of the match date
 #'}
 #'
-#' @format A data frame with 420,541 rows and 68 variables
+#' @format A data frame with 351,894 rows and 68 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_MatchChartingProject}
 #' @name mcp_points
 NULL

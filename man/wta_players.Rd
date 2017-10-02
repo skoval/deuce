@@ -3,7 +3,7 @@
 \name{wta_players}
 \alias{wta_players}
 \title{Biographic Details of WTA Players}
-\format{A data frame with 20,289 rows and 9 variables}
+\format{A data frame with 20,663 rows and 9 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_wta}
 }

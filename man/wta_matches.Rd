@@ -3,7 +3,7 @@
 \name{wta_matches}
 \alias{wta_matches}
 \title{WTA Playing Activity}
-\format{A data frame with 400,212 rows and 72 variables}
+\format{A data frame with 413,611 rows and 72 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_wta}
 }

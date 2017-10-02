@@ -44,7 +44,7 @@
 #'   \item TB5. A character of the point outcomes for the fifth tiebreak
 #'}
 #'
-#' @format A data frame with 89,164 rows and 40 variables
+#' @format A data frame with 124,247 rows and 40 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_pointbypoint}
 #' @name point_by_point
 NULL

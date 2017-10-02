@@ -99,7 +99,7 @@
 #'   \item importance. Numeric of point importance
 #'}
 #'
-#' @format A data frame with 832,477 rows and 85 variables
+#' @format A data frame with 950,944 rows and 85 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_slam_pointbypoint}
 #' @name gs_point_by_point
 NULL
