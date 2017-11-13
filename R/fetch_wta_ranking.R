@@ -6,7 +6,7 @@
 #' @param max_rank A numeric for the lowest ranked player to include
 #'
 #' @examples
-#' fetch_wta_rankings(1, 250)
+#' fetch_wta_rankings(1, 150)
 #'
 #' @export
 #'
