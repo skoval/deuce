@@ -6,6 +6,8 @@
 #' @param year Numeric year of event
 #' @param atp Logical indicator of ATP or WTA
 #'
+#' @details Naming conventions for the tournament should match those used on \url{http://www.stevegtennis.com}
+#'
 #'@examples
 #' fetch_draw("Australian Open", 2017, atp = FALSE)
 #'

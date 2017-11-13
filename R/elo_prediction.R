@@ -1,6 +1,6 @@
 #' Elo-Based Win Prediction
 #'
-#' This function returns the prediction for a match based on player Elo ratings
+#' This function returns the match win prediction based on player Elo ratings
 #'
 #' @param rating1 Numeric of Player 1 Elo rating
 #' @param rating2 Numeric of Player 2 Elo rating
@@ -18,3 +18,4 @@ elo_prediction <- function(rating1, rating2){
 1 / (1 + 10^(rating_diff / 400))
 }
 
+elo_prediction <- Vectorize(elo_prediction)

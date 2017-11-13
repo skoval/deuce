@@ -27,6 +27,9 @@ data frame of draw results
 \description{
 This function downloads Grand Slam tournament draws for ATP and WTA singles
 }
+\details{
+Naming conventions for the tournament should match those used on \url{http://www.stevegtennis.com}
+}
 \examples{
 fetch_draw("Australian Open", 2017, atp = FALSE)
 

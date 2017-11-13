@@ -28,12 +28,6 @@ fetch_atp_tournaments <- function(challenger = FALSE){
 		
 		location <-  gsub("\t", "", lines[grep("tourney-location", lines)[1] + 1])
 
-		tier <- grep("categorystamps", lines)[1]
-		tier_name <- sub("(.*categorystamps_)(.*)(_[0-9].*)", "\\2", lines[tier])		
-		tier <- ifelse(tier_name == "1000s", "1000",
-				ifelse(tier_name == "finals-pos", "Tour Finals",
-					ifelse(tier_name == "grandslam", "Grand Slam", tier_name)))
-
 		draw <- grep("SGL", lines)[1]
 		draw <- item_values[item_values > draw][1] + 1
 
@@ -44,8 +38,19 @@ fetch_atp_tournaments <- function(challenger = FALSE){
 		prize <- item_values[item_values > prize][1] + 1
 		prize <- gsub(",", "", lines[prize])
 
+
+		prize_extract <- function(x){
+			numbers <- str_extract_all(x, "[0-9]")
+			numbers <- collapse(numbers[[1]])
+			location <- str_locate(x, "[0-9]")[1]
+			currency <- substr(x, location - 1, location - 1)
+			if(currency == "#") currency <- "£"
+			if(grepl("A\\$", x)) currency <- "A$"
+		collapse(currency, numbers)
+		}
+		
 		if(grepl("[0-9]", prize))
-			prize <- sub("(.*[0-9])(\t.*)", "\\1", prize)
+			prize <- prize_extract(prize)
 		else
 			prize <- NA
 
@@ -69,7 +74,6 @@ fetch_atp_tournaments <- function(challenger = FALSE){
 			surface_type <- NA
 		}
 
-		tier <- ifelse(challenger, "challenger", tier)
 
 	data.frame(
 		name = tournament_name,
@@ -84,9 +88,13 @@ fetch_atp_tournaments <- function(challenger = FALSE){
 	}
 
 	tier <- grep("categorystamps", tournaments)
+	
 	ntournaments <- length(tournament_list)
+	
 	tier <- tier[(length(tier)-ntournaments+1):length(tier)]
-	tier_name <- sub("(.*categorystamps_)(.*)(_[0-9].*)", "\\2", tournaments[tier])		
+	
+	tier_name <- sub("(.*categorystamps_)(.*)(\\..*)", "\\2", tournaments[tier])		
+	
 	tier <- ifelse(tier_name == "1000s", "1000",
 				ifelse(tier_name == "finals-pos", "Tour Finals",
 					ifelse(tier_name == "grandslam", "Grand Slam", tier_name)))

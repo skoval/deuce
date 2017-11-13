@@ -21,8 +21,8 @@ data frame of match activity and results
  \item draw. Numeric of main draw size
  \item matches. Numeric of total matches played in main draw
  \item surface. Character of surface
- \item prize. Character of prize money awarded
- \item score. Character of match score
+ \item prize. Character of prize money awarded (will be in the currency of the host country)
+ \item score. Character of match score (games won and games lost are collapsed and sets indicated by forward slash)
  \item round. Character of match round
  \item winner. Numeric indicator if player won match
  \item player. Character name of player

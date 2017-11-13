@@ -1,13 +1,14 @@
 importFrom("lubridate", ymd)
 
 export(
-	"fetch_match_stats",
 	"fetch_activity",
 	"fetch_draw",
 	"fetch_head_to_head",
 	"fetch_atp_tournaments",
+	"in_match_win",	
 	"match_win",
 	"fetch_atp_rankings",
+	"fetch_wta_rankings",
 	"elo_prediction"
 )
 

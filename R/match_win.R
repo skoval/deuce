@@ -6,6 +6,10 @@
 #' @param return probability that favored player wins a point on return
 #' @param bestof3 logical indicator whether best-of-3 match (TRUE) or best-of-5 (FALSE)
 #'
+#' @references O'Malley, A. J. (2008). Probability formulas and statistical analysis in tennis. Journal of Quantitative Analysis in Sports, 4(2).
+#' @examples
+#' match_win(serve = 0.65, return = 0.20) # Best of 3
+#' match_win(serve = 0.65, return = 0.20, bestof3 = F) # Best of 5
 #' @export
 match_win <- function(serve, return, bestof3 = TRUE){
 	

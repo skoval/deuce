@@ -15,7 +15,7 @@ elo_prediction(rating1, rating2)
 Match win probability for Player 1
 }
 \description{
-This function returns the prediction for a match based on player Elo ratings
+This function returns the match win prediction based on player Elo ratings
 }
 \examples{
 elo_prediction(2000, 1842)

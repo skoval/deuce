@@ -20,8 +20,8 @@
 ##'  \item draw. Numeric of main draw size
 ##'  \item matches. Numeric of total matches played in main draw
 ##'  \item surface. Character of surface
-##'  \item prize. Character of prize money awarded
-##'  \item score. Character of match score
+##'  \item prize. Character of prize money awarded (will be in the currency of the host country)
+##'  \item score. Character of match score (games won and games lost are collapsed and sets indicated by forward slash)
 ##'  \item round. Character of match round
 ##'  \item winner. Numeric indicator if player won match
 ##'  \item player. Character name of player
@@ -118,8 +118,18 @@ fetch_activity <- function(player, year){
         prize <- item_values[item_values > prize][1] + 1
         prize <- gsub(",", "", lines[prize])
 
+		prize_extract <- function(x){
+			numbers <- str_extract_all(x, "[0-9]")
+			numbers <- collapse(numbers[[1]])
+			location <- str_locate(x, "[0-9]")[1]
+			currency <- substr(x, location - 1, location - 1)
+			if(currency == "#") currency <- "£"
+			if(grepl("A\\$", x)) currency <- "A$"
+		collapse(currency, numbers)
+		}
+
         if(grepl("[0-9]", prize))
-            prize <- sub("&#163;", "L", sub("(.*[0-9])(\t.*)", "\\1", prize), fixed = TRUE)
+            prize <- prize_extract(prize)
         else
             prize <- NA
 
