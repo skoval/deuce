@@ -22,10 +22,12 @@ datasets <- data(package = "deuce")
 
 ## Installation
 
-The **deuce** package can be installed using the standard `install.packages` command.
+Owning to size restrictions on `CRAN`, the **deuce** package must be installed from github using the devtools `install_github` command.
 
 ```{r eval = FALSE}
-install.packages("deuce")
+library(devtools)
+
+devtools::install_github("skoval/deuce")
 ```
 
 After installing, the package can be used in any R session by loading with the `library` command.

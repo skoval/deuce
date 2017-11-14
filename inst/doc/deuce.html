@@ -75,8 +75,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The <strong>deuce</strong> package is a centralized source of data on professional tennis. The purpose of the package is to make it easy for R users to do a variety of sports analyses with real sports data. There are also some functions for importing additional data when recency is a premium.</p>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
-<p>The <strong>deuce</strong> package can be installed using the standard <code>install.packages</code> command.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;deuce&quot;</span>)</code></pre></div>
+<p>Owning to size restrictions on <code>CRAN</code>, the <strong>deuce</strong> package must be installed from github using the devtools <code>install_github</code> command.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+
+devtools::<span class="kw">install_github</span>(<span class="st">&quot;skoval/deuce&quot;</span>)</code></pre></div>
 <p>After installing, the package can be used in any R session by loading with the <code>library</code> command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(deuce)</code></pre></div>
 </div>

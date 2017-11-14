@@ -8,7 +8,9 @@ library(deuce)
 datasets <- data(package = "deuce")
 
 ## ----eval = FALSE--------------------------------------------------------
-#  install.packages("deuce")
+#  library(devtools)
+#  
+#  devtools::install_github("skoval/deuce")
 
 ## ----eval = FALSE--------------------------------------------------------
 #  library(deuce)
