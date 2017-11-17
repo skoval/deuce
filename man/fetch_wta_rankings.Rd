@@ -26,6 +26,6 @@ data frame of rankings for the specified week
 This function extracts current WTA rankings
 }
 \examples{
-fetch_wta_rankings(1, 250)
+fetch_wta_rankings(1, 150)
 
 }

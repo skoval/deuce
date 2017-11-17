@@ -11,6 +11,7 @@ Description: A collection of data sources and tools for
     shot-level to match-level data.
 Depends:
     R (>= 2.10),
+    jsonlite,
     dplyr,
     stringr,
     lubridate,

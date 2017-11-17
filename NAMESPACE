@@ -9,7 +9,8 @@ export(
 	"match_win",
 	"fetch_atp_rankings",
 	"fetch_wta_rankings",
-	"elo_prediction"
+    "elo_prediction",
+    "fetch_slam_pbp"
 )
 
 
