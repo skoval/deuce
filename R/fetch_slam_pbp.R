@@ -8,6 +8,33 @@
 #'
 #' @export
 #' @details This has been tested for 2017. Previous years may not be available as data is archived or site domains have changed.
+#' @return data frame of point by point results
+##' \itemize{
+##'  \item PointServer. Numeric indicator of player who is serving
+##'  \item PointWinner. Numeric indicator of player who won the point
+##'  \item Set. Numeric of set number
+##'  \item Game. Numeric of game number
+##'  \item Time. Elapsed time at start of point (hh:mm:ss)
+##'  \item Ace. Numeric indicator if server made and ace
+##'  \item Winner. Numeric indicator if point ended with a winner
+##'  \item DoubleFault. Numeric indicator if point ended in double fault
+##'  \item UnforcedError. Numeric indicator if point ended in an unforced error
+##'  \item NetPoint. Numeric indicator if point was a net point
+##'  \item WinnerShotType. Character of type of shot for winner (F or B)
+##'  \item ServerError. Logical if server made an error
+##'  \item ReceiverError. Logical if receiver made an error 
+##'  \item SpeedMPH. Numeric of MPH of serve
+##'  \item ServeNumber. Numeric indicator of first or second serve
+##'  \item BreakPointWon. Numeric indicator if break point was won
+##'  \item BreakPointOpportunity. Numeric indicator if had a break point opportunity
+##'  \item GameWinner. Numeric if point ended in game winner and for which player
+##'  \item ForcedError. Numeric of whether point ended in forced error
+##'  \item MatchCode. Identifier of the match
+##'  \item Round. Numeric value of round (1 = First, 7 = Final)
+##'  \item ServerName. Character of server's name
+##'  \item Player1. Character of Player 1 name
+##'  \item Player2. Character of PLayer 2 name
+##'}
 fetch_slam_pbp <- function(event, year){
 	
 	warn <- options("warn")[[1]]
@@ -91,7 +118,7 @@ fetch_slam_pbp <- function(event, year){
 						ifelse(PointServer == 1, 2, 1), 0))
 				
 			)  %>%
-			select(PointWinner, PointServer, Set, Game, Time, PointNumber, Ace, Winner, DoubleFault, UnforcedError, NetPoint, RallyCount, WinnerShotType, ServerError, ReceiverError, ForcedError)              
+			select(PointWinner, PointServer, Set, Game, Time, PointNumber, Ace, Winner, DoubleFault, UnforcedError, NetPoint, RallyCount, WinnerShotType, ServerError, ReceiverError, ForcedError, Speed_MPH, ServeNumber, BreakPointWon, BreakPointOpportunity, GameWinner)              
 		
 		data$MatchCode <- code(file)
 		data$Round <- as.numeric(substr(data$MatchCode, 3, 3))
@@ -106,6 +133,9 @@ fetch_slam_pbp <- function(event, year){
 		data$RallyCount[data$RallyCount == 0 & (data$PointServer == data$PointWinner | data$ReceiverError)] <- 2
 		
 		data <- merge(data, keys, by = "PointServer", all.x = T)
+		
+		data$Player1 <- keys$ServerName[1]
+		data$Player2 <- keys$ServerName[2]
 		
 		data <- data %>% filter(!is.na(ServerName))
 	data	
