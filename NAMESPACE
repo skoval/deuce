@@ -5,6 +5,7 @@ export(
 	"fetch_draw",
 	"fetch_head_to_head",
 	"fetch_atp_tournaments",
+	"fetch_wta_tournaments",
 	"in_match_win",	
 	"match_win",
 	"fetch_atp_rankings",
