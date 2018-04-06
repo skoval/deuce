@@ -56,9 +56,7 @@ fetch_wta_tournaments <- function(VOID){
 	
 	# Event details
 	surface_draw <- function(x){
-		
-		print(x)
-		
+			
 		page <- read_html(x)
 	
 		surface <- page %>%
