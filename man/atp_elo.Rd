@@ -3,16 +3,19 @@
 \name{atp_elo}
 \alias{atp_elo}
 \title{ATP Elo Ratings}
-\format{A data frame with  298,850 rows and 11 variables}
+\format{A data frame with  300,218 rows and 14 variables}
 \description{
 This dataset contains Elo ratings for the ATP tour from the Open Era to the present.
 }
 \details{
 \itemize{
+  \item player_id. An integer ID for the player as in \code{atp_players}
   \item player_name. A character name of the player
   \item tourney_start_date. A date object for the date of the start of the tournament
   \item tourney_name. A character name for the tournament
   \item round. A character description of the the round the match was played in 
+  \item match_num. An integer ID for the match within the event 
+  \item opponent_id. An integer ID for the opponent as in \code{atp_players}
   \item opponent_name. A character name of the opponent
   \item win. A numeric value indicating if the player won the match 
   \item overall_prediction. Numeric prediction of mach outcome based on overall ("all surface" elo)
