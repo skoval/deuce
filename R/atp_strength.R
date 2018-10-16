@@ -20,6 +20,6 @@
 #'}
 #'
 #' @details Only tour-level main draw matches are included in the ratings. For surface ratings, the last rating update is carried forward when matches are played on a different surface. Surface-specific ratings are NA until the first tour-level match is played on that surface.
-#' @format A data frame with  300,218 rows and 14 variables
+#' @format A data frame with 303,940 rows and 14 variables
 #' @name atp_elo
 NULL

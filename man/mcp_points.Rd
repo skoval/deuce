@@ -3,7 +3,7 @@
 \name{mcp_points}
 \alias{mcp_points}
 \title{Detail Point-by-Point Tennis Matches}
-\format{A data frame with 351,894 rows and 68 variables}
+\format{A data frame with  670,790 rows and 68 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_MatchChartingProject}
 }

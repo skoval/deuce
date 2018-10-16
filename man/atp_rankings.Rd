@@ -3,7 +3,7 @@
 \name{atp_rankings}
 \alias{atp_rankings}
 \title{Rankings of ATP Players}
-\format{A data frame with 2,650,204 rows and 5 variables}
+\format{A data frame with 2,746,004 rows and 5 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_atp}
 }

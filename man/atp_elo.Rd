@@ -3,7 +3,7 @@
 \name{atp_elo}
 \alias{atp_elo}
 \title{ATP Elo Ratings}
-\format{A data frame with  300,218 rows and 14 variables}
+\format{A data frame with 303,940 rows and 14 variables}
 \description{
 This dataset contains Elo ratings for the ATP tour from the Open Era to the present.
 }

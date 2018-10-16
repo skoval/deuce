@@ -15,7 +15,7 @@
 #'   \item dob. Date of birth as POSIXct class
 #' }
 #'
-#' @format A data frame with 20,663 rows and 9 variables
+#' @format A data frame with 21,340 rows and 9 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_wta}
 #' @name wta_players
 NULL

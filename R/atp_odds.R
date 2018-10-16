@@ -62,7 +62,7 @@
 #'   \item id. Character id for the match
 #'}
 #'
-#' @format A data frame with 48,249 rows and 57 variables
+#' @format A data frame with 49,881 rows and 57 variables
 #' @source \url{http://www.tennis-data.co.uk/alldata.php}
 #' @name atp_odds
 NULL

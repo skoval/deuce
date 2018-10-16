@@ -3,7 +3,7 @@
 \name{wta_elo}
 \alias{wta_elo}
 \title{WTA Elo Ratings}
-\format{A data frame with 255,692 rows and 14 variables}
+\format{A data frame with 260,042 rows and 14 variables}
 \description{
 This dataset contains Elo ratings for the WTA tour from the Open Era to the present.
 }

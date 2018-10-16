@@ -1,9 +1,9 @@
 Package: deuce
 Type: Package
 Title: Resources for Analysis of Professional Tennis Data
-Version: 1.0
+Version: 1.1
 Encoding: latin1
-Date: 2017-11-12
+Date: 2018-10-16
 Author: Stephanie Kovalchik
 Maintainer: Stephanie Kovalchik <s.a.kovalchik@gmail.com>
 Description: A collection of data sources and tools for

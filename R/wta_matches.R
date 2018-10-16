@@ -58,7 +58,7 @@
 #'   \item match_id. Character identifier of the match.
 #'}
 #'
-#' @format A data frame with 413,611 rows and 72 variables
+#' @format A data frame with 435,844 rows and 72 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_wta}
 #' @name wta_matches
 NULL

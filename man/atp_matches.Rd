@@ -3,7 +3,7 @@
 \name{atp_matches}
 \alias{atp_matches}
 \title{ATP Playing Activity}
-\format{A data frame with 687,959 rows and 72 variables}
+\format{A data frame with 718,841 rows and 72 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_atp}
 }

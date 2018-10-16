@@ -3,7 +3,7 @@
 \name{wta_rankings}
 \alias{wta_rankings}
 \title{Rankings of WTA Players}
-\format{A data frame with 1,616,707 rows and 5 variables}
+\format{A data frame with 1,671,585  rows and 5 variables}
 \source{
 \url{https://github.com/JeffSackmann/tennis_wta}
 }

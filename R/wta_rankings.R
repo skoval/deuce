@@ -10,7 +10,7 @@
 #'   \item date. Date of ranking as POSIXct class
 #' }
 #'
-#' @format A data frame with 1,616,707 rows and 5 variables
+#' @format A data frame with 1,671,585  rows and 5 variables
 #' @source \url{https://github.com/JeffSackmann/tennis_wta}
 #' @name wta_rankings
 NULL

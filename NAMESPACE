@@ -11,7 +11,10 @@ export(
 	"fetch_atp_rankings",
 	"fetch_wta_rankings",
     "elo_prediction",
-    "fetch_slam_pbp"
+    "fetch_slam_pbp",
+    "importance",
+    "serve_loss_importance",
+    "return_loss_importance"
 )
 
 

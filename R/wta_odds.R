@@ -50,7 +50,7 @@
 #'   \item id. Character id for the match
 #'}
 #'
-#' @format A data frame with 27,784 rows and 45 variables
+#' @format A data frame with 29,495 rows and 45 variables
 #' @source \url{http://www.tennis-data.co.uk/alldata.php}
 #' @name wta_odds
 NULL
