@@ -31,6 +31,9 @@ Any of the individual datasets can be loaded with the `data` command. For exampl
 
 `summary(atp_matches)`
 
+## Updating the Datasets
+
+The `make.R` file under the package parent directory does all of the pre-processing for the major historical datasets. All of the data sources can be accessed over an internet connection. The only change the user would have to make in order to update their local package would be to change the `package_root` to the path where their local version of `deuce` lives.
 
 ## Functions
 
@@ -43,6 +46,7 @@ An example of one of the data-scraping functions is `fetch_activity`. When conne
 
 `fetch_activity("Rafael Nadal", 2017)`
 
+There are also serveral `tidy` functions for pre-processing the major datasets that are included with the package. 
 
-
+For users interested in updating or running their own player Elo ratings, I would recommend looking at the Rcpp implementation of @martiningram, which you can find [here](https://github.com/martiningram/tennisratingscpp)
 

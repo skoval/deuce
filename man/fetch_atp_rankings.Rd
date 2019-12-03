@@ -4,7 +4,7 @@
 \alias{fetch_atp_rankings}
 \title{Download Rankings from ATP Tour Website}
 \usage{
-fetch_atp_rankings(date, min_rank = 1, max_rank = 100)
+fetch_atp_rankings(date, min_rank = 1, max_rank = 100, singles = T)
 }
 \arguments{
 \item{date}{A character date for extracting rankings, YYYY-MM-DD}

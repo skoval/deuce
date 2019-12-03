@@ -4,7 +4,8 @@
 \alias{importance}
 \title{Calculate Point Importance}
 \usage{
-importance(id, serve.prob, return.prob, bestof3 = TRUE, advantage = TRUE)
+importance(id, serve.prob, return.prob, bestof3 = TRUE,
+  advantage = TRUE)
 }
 \arguments{
 \item{id}{Score id for the start of the current point}

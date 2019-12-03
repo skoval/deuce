@@ -20,7 +20,7 @@
 ##'  \item points. Numeric of ranking points
 ##'}
 ##'
-fetch_atp_rankings <- function(date, min_rank = 1, max_rank = 100){
+fetch_atp_rankings <- function(date, min_rank = 1, max_rank = 100, singles = T){
 
 	nearest_monday <- function(date){
 
@@ -45,7 +45,10 @@ fetch_atp_rankings <- function(date, min_rank = 1, max_rank = 100){
 	as.character(date)											
 	}
 	
-	url <- "http://www.atpworldtour.com/en/rankings/singles?rankDate=DATE&rankRange=RANK&countryCode=all"
+	if(singles)
+		url <- "http://www.atpworldtour.com/en/rankings/singles?rankDate=DATE&rankRange=RANK&countryCode=all"	
+	else
+	url <- "http://www.atpworldtour.com/en/rankings/doubles?rankDate=DATE&rankRange=RANK&countryCode=all"
 
 	rank <- paste(min_rank, max_rank, sep = "-")
 	
@@ -54,28 +57,10 @@ fetch_atp_rankings <- function(date, min_rank = 1, max_rank = 100){
 	url <- sub("DATE", date, url)
 	url <- sub("RANK", rank, url)
 	
-	rankings <- readLines(url)
+	rankings <- read_html(url) %>% html_nodes("table") %>%  html_table()
+	rankings <- rankings[[1]]
 	
-	name_index <- grep("en/players.*[a-z][0-9]+.*>[A-Z]", rankings)
-	name <- sub("(.*en/players.*>)([A-Z].*)(</a>.*)", "\\2", rankings[name_index])
-	
-	code <- sub("(.*)(en/players.*)(/overview.*)", "\\2", rankings[name_index])
-	age <- sub("([0-9]+)(\t.*)","\\1",rankings[name_index + 2])
-	
-	ranks <- grep("rank-cell", rankings)
-	ranks <- gsub("\t","",rankings[ranks + 1])
-	
-	ranking_points <- sub("(.*rankings.*>)([0-9].*)(</a.*)","\\2",rankings[name_index + 4])
-	tournaments_played <- sub("(.*player-activity.*>)([0-9].*)(</a.*)","\\2",rankings[name_index + 6])
+	rankings$Date <- date
 
-	# Remove URL from output
-	
-data.frame(
-	player = name,
-	date = ymd(date),
-	rank = ranks,
-	age = age,
-	points = ranking_points
-)
-
+rankings
 }

@@ -12,7 +12,14 @@ export(
 	"fetch_wta_rankings",
     "elo_prediction",
     "fetch_slam_pbp",
-    "importance"
+    "importance",
+    "fetch_odds",
+    "tidy_point_by_point",
+    "tidy_match_data",
+    "fetch_repo_files",
+    "tidy_rankings_data",
+    "fetch_repo_data",
+    "tidy_player_data"
 )
 
 
