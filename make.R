@@ -26,7 +26,13 @@ atp_players <- tidy_player_data(atp_players)
 
 save(atp_players, file = file.path(package_root, "data/atp_players.RData"))
 
-atp_rankings <- do.call("rbind", lapply(grep("rankings_[0-9]", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = T, quote = "")))
+atp_rankings <- do.call("rbind", lapply(grep("rankings_[078]", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = T, quote = "")))
+# Deal with different format of ranking files
+atp_rankings2 <- do.call("rbind", lapply(grep("rankings_[19]", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = F, quote = "")))
+
+names(atp_rankings2) <- names(atp_rankings)
+
+atp_rankings <- rbind(atp_rankings, atp_rankings2)
 
 atp_rankings <- tidy_rankings_data(atp_rankings)
 
