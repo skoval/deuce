@@ -10,8 +10,9 @@ tidy_match_data <- function(data, atp = T){
 		result <- sapply(x, function(z) ifelse(grepl("[[:punct:]]", z[1]), NA, z[1]))
 		if(all(is.na(result)))
 			rep(NA, 5)
-		else
-			c(result[!is.na(result)], rep(NA, 5 - length(result[!is.na(result)])))
+		else{
+			c(result[!is.na(result)], rep(NA, 5 - min(c(5, length(result[!is.na(result)])))))
+		}
 	})
 	
 	loser_games <- sapply(games_won, function(x) {
@@ -19,7 +20,7 @@ tidy_match_data <- function(data, atp = T){
 		if(all(is.na(result)))
 			rep(NA, 5)
 		else
-			c(result[!is.na(result)], rep(NA, 5 - length(result[!is.na(result)])))
+			c(result[!is.na(result)], rep(NA, 5 - min(c(5, length(result[!is.na(result)])))))
 	})
 	
 	winner_games <- t(winner_games)

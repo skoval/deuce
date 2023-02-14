@@ -28,7 +28,7 @@ save(atp_players, file = file.path(package_root, "data/atp_players.RData"))
 
 atp_rankings <- do.call("rbind", lapply(grep("rankings_[078]", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = T, quote = "")))
 # Deal with different format of ranking files
-atp_rankings2 <- do.call("rbind", lapply(grep("rankings_[19]", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = F, quote = "")))
+atp_rankings2 <- do.call("rbind", lapply(grep("rankings_[19c]", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = F, quote = "")))
 
 names(atp_rankings2) <- names(atp_rankings)
 
@@ -38,7 +38,10 @@ atp_rankings <- tidy_rankings_data(atp_rankings)
 
 save(atp_rankings, file = file.path(package_root, "data/atp_rankings.RData"))
 
-atp_matches <- do.call("rbind", lapply(grep("matches", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = T)))
+match_files <- grep("matches", files , val = T)
+match_files <- match_files[!grepl("doubles", match_files)]
+
+atp_matches <- do.call("rbind", lapply(match_files, function(x) fetch_repo_data(x, strings = FALSE, header = T)))
 
 atp_matches <- tidy_match_data(atp_matches)
 
@@ -55,7 +58,7 @@ wta_players <- tidy_player_data(wta_players)
 
 save(wta_players, file = file.path(package_root, "data/wta_players.RData"))
 
-wta_rankings <- do.call("rbind", lapply(grep("rankings_[0-9]", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = FALSE, quote = "")))
+wta_rankings <- do.call("rbind", lapply(grep("rankings_[0-9c]", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = FALSE, quote = "")))
 
 wta_rankings <- tidy_rankings_data(wta_rankings)
 
@@ -85,7 +88,9 @@ repo <- "https://github.com/JeffSackmann/tennis_MatchChartingProject"
 
 files <- fetch_repo_files(repo)
 
-matches <- do.call("rbind", lapply(grep("matches", files, val = T), function(x) fetch_repo_data(x, strings = FALSE, header = T, quote = "")))
+match_files <- grep("wta_matches_[0-9]{4}", files, val = T)
+
+matches <- do.call("rbind", lapply(match_files, function(x) fetch_repo_data(x, strings = FALSE, header = T, quote = "")))
 
 matches$Date[matches$match_id == "1990409-W-Amelia_Island-F-Steffi_Graf-Arantxa_Sanchez_Vicario"] <- "19900409"
 

@@ -1,7 +1,7 @@
 Package: deuce
 Type: Package
 Title: Resources for Analysis of Professional Tennis Data
-Version: 1.3
+Version: 1.4
 Encoding: latin1
 Date: 2019-12-02
 Author: Stephanie Kovalchik
@@ -19,4 +19,4 @@ Depends:
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr    
 License: GPL-2
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.1

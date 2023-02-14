@@ -15,6 +15,7 @@ export(
     "importance",
     "fetch_odds",
     "tidy_point_by_point",
+    "tidy_slam_point_by_point",
     "tidy_match_data",
     "fetch_repo_files",
     "tidy_rankings_data",
