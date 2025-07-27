@@ -2,6 +2,10 @@
 tidy_match_data <- function(data, atp = T){
 		
 	# Parse scores 
+	data$score[data$score == "2-6 6 2 7-9 6-4 6-3"] <- "2-6 6-2 7-9 6-4 6-3"
+	data$score[data$score == "3-6 6 -3 6-8 6-2 10-8"] <- "3-6 6-3 6-8 6-2 10-8"
+	data$score[data$score == "6-3 1-6 4-6 1-0 8 6-0"] <- "6-3 1-6 4-6 1-6 6-0"
+
 	games_won <- sapply(strsplit(data$score, split = " "), function(x){
 		strsplit(gsub("\\([0-9]+\\)","",gsub("[A-Za-z]","",x)), split = "-")
 		})
@@ -11,7 +15,9 @@ tidy_match_data <- function(data, atp = T){
 		if(all(is.na(result)))
 			rep(NA, 5)
 		else{
-			c(result[!is.na(result)], rep(NA, 5 - min(c(5, length(result[!is.na(result)])))))
+			result <- c(result[!is.na(result)], rep(NA, 5 - min(c(5, length(result[!is.na(result)])))))
+			result <- as.numeric(result)
+			result
 		}
 	})
 	
@@ -19,8 +25,11 @@ tidy_match_data <- function(data, atp = T){
 		result <- sapply(x, function(z) z[2])
 		if(all(is.na(result)))
 			rep(NA, 5)
-		else
-			c(result[!is.na(result)], rep(NA, 5 - min(c(5, length(result[!is.na(result)])))))
+		else{
+			result <- c(result[!is.na(result)], rep(NA, 5 - min(c(5, length(result[!is.na(result)])))))
+			result <- as.numeric(result)
+			result
+		}
 	})
 	
 	winner_games <- t(winner_games)

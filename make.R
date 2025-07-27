@@ -1,4 +1,7 @@
 library(deuce)
+library(httr)
+library(jsonlite)
+
 
 ### SUPPLY ROOT FOR LOCAL DEUCE PACKAGE
 package_root <- "~/Software/deuce"
@@ -6,7 +9,7 @@ package_root <- "~/Software/deuce"
 ### COLLECT AND SAVE PBP DATA
 repo <- "https://github.com/JeffSackmann/tennis_pointbypoint"
 
-files <- fetch_repo_files(repo)
+files <- fetch_repo_files("JeffSackmann/tennis_pointbypoint")
 
 point_by_point <- do.call("rbind", lapply(files, function(x) fetch_repo_data(x, stringsAsFactors = F, header = T)))
 
@@ -18,7 +21,7 @@ save(point_by_point, file = file.path(package_root, "data/point_by_point.RData")
 ### COLLECT MATCH, RANKINGS, AND PLAYER DATA
 repo <- "https://github.com/JeffSackmann/tennis_atp"
 
-files <- fetch_repo_files(repo)
+files <- fetch_repo_files("JeffSackmann/tennis_atp")
 
 atp_players <- fetch_repo_data(grep("players", files, val = T), stringsAsFactors = F, header = F)
 
@@ -50,7 +53,7 @@ save(atp_matches, file = file.path(package_root, "data/atp_matches.RData"))
 ### COLLECT MATCH, RANKINGS, AND PLAYER DATA
 repo <- "https://github.com/JeffSackmann/tennis_wta"
 
-files <- fetch_repo_files(repo)
+files <- fetch_repo_files("JeffSackmann/tennis_wta")
 
 wta_players <- fetch_repo_data(grep("players", files, val = T), stringsAsFactors = F, header = F)
 
@@ -86,7 +89,7 @@ save(wta_matches, file = file.path(package_root, "data/wta_matches.RData"))
 ### COLLECT MCP
 repo <- "https://github.com/JeffSackmann/tennis_MatchChartingProject"
 
-files <- fetch_repo_files(repo)
+files <- fetch_repo_files("JeffSackmann/tennis_MatchChartingProject")
 
 match_files <- grep("wta_matches_[0-9]{4}", files, val = T)
 
@@ -100,6 +103,7 @@ points <- lapply(grep("points", files, val = T), function(x) fetch_repo_data(x, 
 
 names(points) <- grep("points", files, val = T)
 colnames(points[[grep("w-points", names(points))]]) <- colnames(points[[grep("m-points", names(points))]])
+
 points <- do.call("rbind", points)
 
 mcp_points <- points %>%
@@ -119,7 +123,7 @@ save(wta_odds, file = file.path(package_root, "data/wta_odds.RData"))
 ### COLLECT SLAM PBP DATA
 repo <- "https://github.com/JeffSackmann/tennis_slam_pointbypoint"
 
-files <- fetch_repo_files(repo)
+files <- fetch_repo_files("JeffSackmann/tennis_slam_pointbypoint")
 
 gs_point_by_point <- lapply(grep("points", files, val = T), function(x) fetch_repo_data(x, stringsAsFactors = F, header = T))
 

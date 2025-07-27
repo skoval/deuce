@@ -1,17 +1,23 @@
 #' Scrapes CSV files from GITHUB repository
 #' 
-#' @param. url The repo URL address
+#' @param. repo The repo user/repo_name
 #' 
 #' @export
-fetch_repo_files <- function(url){
-	
-	page <- read_html(url) 
+fetch_repo_files <- function(repo, branch = "master") {
+  # repo format: "user/repo"
+  api_url <- paste0("https://api.github.com/repos/", repo, "/git/trees/", branch, "?recursive=1")
+  res <- GET(api_url)
 
-	files <- page %>%
-#		html_nodes("td.content") %>%
-		html_nodes("a") %>%
-		html_attr("href")
-	
-	# Returns CSV
-grep("\\.csv", files, val = T)
+  if (status_code(res) != 200) {
+    stop("Failed to retrieve data from GitHub API.")
+  }
+
+  content <- fromJSON(content(res, "text", encoding = "UTF-8"))
+  files <- content$tree$path
+  files <- grep("csv", files, val = TRUE)
+  full_files <- sapply(files, function(x){
+	glue::glue("/{repo}/blob/{branch}/{x}")
+  })
+
+return(full_files)
 }
